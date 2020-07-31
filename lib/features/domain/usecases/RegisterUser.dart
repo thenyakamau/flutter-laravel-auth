@@ -14,7 +14,9 @@ class RegisterUser extends UseCase<ApiSuccess, RegisterParams> {
   RegisterUser({@required this.authRepository});
 
   @override
-  Future<Either<Failure, ApiSuccess>> call(RegisterParams params) {}
+  Future<Either<Failure, ApiSuccess>> call(RegisterParams params) {
+    return authRepository.registerUser(params.userModel);
+  }
 }
 
 class RegisterParams extends Equatable {

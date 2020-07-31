@@ -13,17 +13,18 @@ class LoginEvent extends AuthEvent {
 }
 
 class RegisterEvent extends AuthEvent {
-  final String name, email, phone, password;
+  final String name, email, phone, password, cPassword;
 
   RegisterEvent({
     @required this.name,
     @required this.email,
     @required this.phone,
     @required this.password,
+    @required this.cPassword,
   });
 
   @override
-  List<Object> get props => [name, email, phone, password];
+  List<Object> get props => [name, email, phone, password, cPassword];
 }
 
 class RefreshTokenEvent extends AuthEvent {
