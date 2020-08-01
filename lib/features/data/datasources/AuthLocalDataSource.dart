@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../core/errors/Exceptions.dart';
 import '../../../core/utils/Constants.dart';
 import '../models/AuthTokenModel.dart';
 
@@ -18,10 +19,14 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
 
   @override
   Future<void> cacheAuthToken(AuthTokenModel authTokenModel) {
-    return sharedPreferences.setString(
-      CACHE_AUTH_TOKEN,
-      json.encode(authTokenModel.toJson()),
-    );
+    try {
+      return sharedPreferences.setString(
+        CACHE_AUTH_TOKEN,
+        json.encode(authTokenModel.toJson()),
+      );
+    } catch (e) {
+      throw CacheException();
+    }
   }
 
   @override

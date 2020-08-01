@@ -19,12 +19,10 @@ class LoginBody extends StatelessWidget {
           alignment: Alignment.center,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-          ),
-          child: Image.asset(
-            'assets/icons/e_commerce.jpg',
-            fit: BoxFit.fill,
-            width: 180,
-            height: 180,
+            image: DecorationImage(
+              image: AssetImage('assets/icons/e_commerce.jpg'),
+              fit: BoxFit.fill,
+            ),
           ),
         ),
         Container(

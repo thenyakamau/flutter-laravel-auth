@@ -7,4 +7,5 @@ import '../entities/ApiSuccess.dart';
 abstract class AuthRepository {
   Future<Either<Failure, ApiSuccess>> registerUser(UserModel userModel);
   Future<Either<Failure, ApiSuccess>> loginUser(String email, String password);
+  Future<Either<Failure, ApiSuccess>> refreshUser();
 }

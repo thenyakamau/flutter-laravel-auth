@@ -10,7 +10,7 @@ class RoutesGenerator {
   static Route<dynamic> generateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case '/':
-        return CupertinoPageRoute(builder: (_) => LoginPage());
+        return CupertinoPageRoute(builder: (_) => SplashPage());
       case '/register':
         return CupertinoPageRoute(builder: (_) => RegisterPage());
       case '/home':

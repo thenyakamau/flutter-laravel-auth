@@ -32,7 +32,7 @@ dependencies:
   equatable: ^1.2.3
   shared_preferences: ^0.5.8
   data_connection_checker: ^0.3.4
-  chopper: ^2.0.0
+  chopper: ^3.0.2
   logging: ^0.11.4
   get_it: ^4.0.4
   shimmer: ^1.1.1
@@ -42,8 +42,8 @@ dev_dependencies:
     sdk: flutter
 
   build_runner:
-  chopper_generator: ^2.0.0
   json_serializable: ^3.3.0
+  chopper_generator: ^3.0.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

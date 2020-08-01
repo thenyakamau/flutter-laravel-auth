@@ -29,3 +29,8 @@ class AuthLoadedState extends AuthState {
   @override
   List<Object> get props => [message];
 }
+
+class UnAuthenticatedState extends AuthState {
+  @override
+  List<Object> get props => [];
+}

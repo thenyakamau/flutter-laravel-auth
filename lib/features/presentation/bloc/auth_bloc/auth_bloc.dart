@@ -6,10 +6,12 @@ import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../core/errors/Failures.dart';
+import '../../../../core/usecases/UseCases.dart';
 import '../../../../core/utils/AuthentcationCheck.dart';
 import '../../../../core/utils/Constants.dart';
 import '../../../domain/entities/ApiSuccess.dart';
 import '../../../domain/usecases/LoginUser.dart';
+import '../../../domain/usecases/RefreshAuthentication.dart';
 import '../../../domain/usecases/RegisterUser.dart';
 
 part 'auth_event.dart';
@@ -19,10 +21,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final CheckAuthentication checkAuthentication;
   final LoginUser loginUser;
   final RegisterUser registerUser;
+  final RefreshAuthentication refreshAuthentication;
   AuthBloc({
     @required this.checkAuthentication,
     @required this.loginUser,
     @required this.registerUser,
+    @required this.refreshAuthentication,
   }) : super(AuthInitial());
 
   @override
@@ -41,7 +45,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         final authEither = await loginUser(
           LoginParams(email: event.email, password: event.password),
         );
-        yield _getAuthOrFail(authEither);
+        yield* _getAuthOrFail(authEither);
       });
     } else if (event is RegisterEvent) {
       yield AuthLoadingState();
@@ -56,9 +60,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         yield AuthErrorState(message: failure);
       }, (user) async* {
         final authEither = await registerUser(RegisterParams(userModel: user));
-        yield _getAuthOrFail(authEither);
+        yield* _getAuthOrFail(authEither);
       });
-    } else if (event is RefreshTokenEvent) {}
+    } else if (event is RefreshTokenEvent) {
+      final authEither = await refreshAuthentication(NoParams());
+      yield* _getAuthOrFail(authEither);
+    }
   }
 }
 

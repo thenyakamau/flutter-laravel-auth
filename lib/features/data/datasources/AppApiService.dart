@@ -8,9 +8,21 @@ part 'AppApiService.chopper.dart';
 @ChopperApi(baseUrl: '/api/')
 abstract class AppApiService extends ChopperService {
   @Post(path: 'register')
+  @FactoryConverter(request: FormUrlEncodedConverter.requestFactory)
   Future<Response> registerUser(
     @Body() Map<String, dynamic> body,
   );
+
+  @Post(path: 'login')
+  @FactoryConverter(request: FormUrlEncodedConverter.requestFactory)
+  Future<Response> loginUser(
+    @Field('username') String email,
+    @Field() String password,
+  );
+
+  @Post(path: 'refresh')
+  @FactoryConverter(request: FormUrlEncodedConverter.requestFactory)
+  Future<Response> refreshUser(@Field() String refreshToken);
 
   static AppApiService create() {
     final client = ChopperClient(
