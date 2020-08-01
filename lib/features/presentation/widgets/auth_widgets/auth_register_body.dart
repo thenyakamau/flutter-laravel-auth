@@ -1,14 +1,27 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils/Constants.dart';
+import '../../bloc/auth_bloc/auth_bloc.dart';
 import '../button_widget.dart';
 import 'change_auth_screens.dart';
 import 'social_buttons.dart';
 
-class RegisterBody extends StatelessWidget {
-  const RegisterBody({
-    Key key,
-  }) : super(key: key);
+class RegisterBody extends StatefulWidget {
+  const RegisterBody({Key key, @required this.state, @required this.authBloc})
+      : super(key: key);
+
+  final state, authBloc;
+
+  @override
+  _RegisterBodyState createState() => _RegisterBodyState();
+}
+
+class _RegisterBodyState extends State<RegisterBody> {
+  String name, email, phone, password, cPassword;
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,10 +48,18 @@ class RegisterBody extends StatelessWidget {
                     ),
                     labelText: "Name",
                     labelStyle: kLabelStyle,
+                    errorText: widget.state.title == "name"
+                        ? widget.state.message
+                        : null,
                     hintText: "Enter name",
                     hintStyle: kHintTextStyle,
                     prefixIcon: Icon(Icons.account_box),
                   ),
+                  onChanged: (value) {
+                    setState(() {
+                      name = value;
+                    });
+                  },
                 ),
               ),
               Padding(
@@ -51,10 +72,18 @@ class RegisterBody extends StatelessWidget {
                     ),
                     labelText: "Email",
                     labelStyle: kLabelStyle,
+                    errorText: widget.state.title == "email"
+                        ? widget.state.message
+                        : null,
                     hintText: "Enter email",
                     hintStyle: kHintTextStyle,
                     prefixIcon: Icon(Icons.email),
                   ),
+                  onChanged: (value) {
+                    setState(() {
+                      email = value;
+                    });
+                  },
                 ),
               ),
               Padding(
@@ -67,10 +96,18 @@ class RegisterBody extends StatelessWidget {
                     ),
                     labelText: "Phone",
                     labelStyle: kLabelStyle,
+                    errorText: widget.state.title == "number"
+                        ? widget.state.message
+                        : null,
                     hintText: "Enter Phone number",
                     hintStyle: kHintTextStyle,
                     prefixIcon: Icon(Icons.phone),
                   ),
+                  onChanged: (value) {
+                    setState(() {
+                      phone = value;
+                    });
+                  },
                 ),
               ),
               Padding(
@@ -84,10 +121,20 @@ class RegisterBody extends StatelessWidget {
                     ),
                     labelText: "Password",
                     labelStyle: kLabelStyle,
+                    errorText: widget.state.title == "password"
+                        ? widget.state.message
+                        : widget.state.title == 'cPassword'
+                            ? widget.state.message
+                            : null,
                     hintText: "Enter password",
                     hintStyle: kHintTextStyle,
                     prefixIcon: Icon(Icons.lock),
                   ),
+                  onChanged: (value) {
+                    setState(() {
+                      password = value;
+                    });
+                  },
                 ),
               ),
               Padding(
@@ -101,13 +148,32 @@ class RegisterBody extends StatelessWidget {
                     ),
                     labelText: "Confirm Password",
                     labelStyle: kLabelStyle,
+                    errorText: widget.state.title == "cPassword"
+                        ? widget.state.message
+                        : null,
                     hintText: "Enter confirmation password",
                     hintStyle: kHintTextStyle,
                     prefixIcon: Icon(Icons.lock),
                   ),
+                  onChanged: (value) {
+                    setState(() {
+                      cPassword = value;
+                    });
+                  },
                 ),
               ),
-              MyCustomButton(press: null, title: 'Sign Up'),
+              MyCustomButton(
+                press: () => widget.authBloc.add(
+                  RegisterEvent(
+                    name: name,
+                    email: email,
+                    phone: phone,
+                    password: password,
+                    cPassword: cPassword,
+                  ),
+                ),
+                title: 'Sign Up',
+              ),
               Align(
                 alignment: Alignment.center,
                 child: Text(

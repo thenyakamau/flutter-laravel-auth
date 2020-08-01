@@ -1,9 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:logging/logging.dart';
+import 'injection_container.dart' as di;
 
 import 'core/routes/RoutesGenerator.dart';
 import 'core/utils/Constants.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await di.init();
+  _setUpLogging();
+  runApp(MyApp());
+}
+
+void _setUpLogging() {
+  Logger.root.level = Level.ALL;
+  Logger.root.onRecord.listen((event) {
+    print('${event.level.name}:${event.time}:${event.message}');
+  });
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.

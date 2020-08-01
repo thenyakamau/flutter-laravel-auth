@@ -40,7 +40,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         event.password,
       );
       yield* formatEither.fold((failure) async* {
-        yield AuthErrorState(message: failure);
+        final String title = failure[0].toString();
+        final String message = failure[1].toString();
+        yield AuthErrorState(message: message, title: title);
       }, (success) async* {
         final authEither = await loginUser(
           LoginParams(email: event.email, password: event.password),
@@ -57,14 +59,25 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         event.cPassword,
       );
       yield* formatEither.fold((failure) async* {
-        yield AuthErrorState(message: failure);
+        final String title = failure[0].toString();
+        final String message = failure[1].toString();
+        yield AuthErrorState(message: message, title: title);
       }, (user) async* {
         final authEither = await registerUser(RegisterParams(userModel: user));
         yield* _getAuthOrFail(authEither);
       });
     } else if (event is RefreshTokenEvent) {
       final authEither = await refreshAuthentication(NoParams());
-      yield* _getAuthOrFail(authEither);
+      yield* authEither.fold((failure) async* {
+        if (failure is UnAuthenticatedFailure) {
+          yield UnAuthenticatedState();
+        } else {
+          AuthErrorState(
+              message: _mapFailureToMessage(failure), title: "Error");
+        }
+      }, (success) async* {
+        AuthLoadedState(message: success.message);
+      });
     }
   }
 }
@@ -72,8 +85,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 Stream<AuthState> _getAuthOrFail(
     Either<Failure, ApiSuccess> authEither) async* {
   yield authEither.fold(
-    (failure) => AuthErrorState(message: _mapFailureToMessage(failure)),
-    (authToken) => AuthLoadedState(message: "Welcome back"),
+    (failure) =>
+        AuthErrorState(message: _mapFailureToMessage(failure), title: "Error"),
+    (apiSuccess) => AuthLoadedState(message: apiSuccess.message),
   );
 }
 

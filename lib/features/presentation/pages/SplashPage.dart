@@ -45,6 +45,21 @@ class _SplashPageState extends State<SplashPage> {
                       LoadingWidget(height: (height * 0.25))
                     ],
                   );
+                } else if (state is UnAuthenticatedState) {
+                  WidgetsBinding.instance.addPostFrameCallback(
+                    (_) => Navigator.of(context).pushReplacementNamed('/login'),
+                  );
+                  return Container(color: Colors.white);
+                } else if (state is AuthLoadedState) {
+                  WidgetsBinding.instance.addPostFrameCallback(
+                    (_) => Navigator.of(context).pushReplacementNamed('/home'),
+                  );
+                  return Container(color: Colors.white);
+                } else {
+                  WidgetsBinding.instance.addPostFrameCallback(
+                    (_) => Navigator.of(context).pushReplacementNamed('/home'),
+                  );
+                  return Container(color: Colors.white);
                 }
               },
             )),

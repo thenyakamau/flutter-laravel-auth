@@ -26,7 +26,7 @@ abstract class AppApiService extends ChopperService {
 
   static AppApiService create() {
     final client = ChopperClient(
-        baseUrl: 'https://coronavirus-19-api.herokuapp.com',
+        baseUrl: 'https://7ce0515e9689.ngrok.io',
         services: [_$AppApiService()],
         converter: JsonConverter(),
         client: http.IOClient(
