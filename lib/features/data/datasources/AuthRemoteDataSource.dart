@@ -21,6 +21,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     final response = await apiService.loginUser(email, password);
     if (response.statusCode == 200) {
       var result = AuthTokenModel.fromJson(response.body);
+      print(result);
       return result;
     } else {
       throw ServerException();
@@ -40,7 +41,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   @override
   Future<AuthTokenModel> refreshUser(AuthTokenModel authTokenModel) async {
-    final response = await apiService.refreshUser(authTokenModel.refreshToken);
+    final response = await apiService.refreshUser(authTokenModel.refresh_token);
     if (response.statusCode == 200) {
       var result = AuthTokenModel.fromJson(response.body);
       return result;

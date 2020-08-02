@@ -22,11 +22,11 @@ abstract class AppApiService extends ChopperService {
 
   @Post(path: 'refresh')
   @FactoryConverter(request: FormUrlEncodedConverter.requestFactory)
-  Future<Response> refreshUser(@Field() String refreshToken);
+  Future<Response> refreshUser(@Field('refresh_token') String refreshToken);
 
   static AppApiService create() {
     final client = ChopperClient(
-        baseUrl: 'https://7ce0515e9689.ngrok.io',
+        baseUrl: 'https://3165c8846fa7.ngrok.io',
         services: [_$AppApiService()],
         converter: JsonConverter(),
         client: http.IOClient(

@@ -72,11 +72,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         if (failure is UnAuthenticatedFailure) {
           yield UnAuthenticatedState();
         } else {
-          AuthErrorState(
+          yield AuthErrorState(
               message: _mapFailureToMessage(failure), title: "Error");
         }
       }, (success) async* {
-        AuthLoadedState(message: success.message);
+        yield AuthLoadedState(message: success.message);
       });
     }
   }

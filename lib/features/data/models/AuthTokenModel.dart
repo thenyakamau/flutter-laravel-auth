@@ -5,16 +5,16 @@ part 'AuthTokenModel.g.dart';
 
 @JsonSerializable()
 class AuthTokenModel {
-  final String tokenType;
-  final int expiresIn;
-  final String accessToken;
-  final String refreshToken;
+  final String token_type;
+  final int expires_in;
+  final String access_token;
+  final String refresh_token;
 
   AuthTokenModel({
-    @required this.tokenType,
-    @required this.expiresIn,
-    @required this.accessToken,
-    @required this.refreshToken,
+    @required this.token_type,
+    @required this.expires_in,
+    @required this.access_token,
+    @required this.refresh_token,
   });
 
   factory AuthTokenModel.fromJson(Map<String, dynamic> json) =>

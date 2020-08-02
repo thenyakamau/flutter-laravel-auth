@@ -37,7 +37,7 @@ class _$AppApiService extends AppApiService {
   @override
   Future<Response<dynamic>> refreshUser(String refreshToken) {
     final $url = '/api/refresh';
-    final $body = <String, dynamic>{'refreshToken': refreshToken};
+    final $body = <String, dynamic>{'refresh_token': refreshToken};
     final $request = Request('POST', $url, client.baseUrl, body: $body);
     return client.send<dynamic, dynamic>($request,
         requestConverter: FormUrlEncodedConverter.requestFactory);
