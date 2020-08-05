@@ -5,7 +5,7 @@ import 'package:http/io_client.dart' as http;
 
 part 'AppApiService.chopper.dart';
 
-@ChopperApi(baseUrl: '/api/')
+@ChopperApi(baseUrl: '/seller/')
 abstract class AppApiService extends ChopperService {
   @Post(path: 'register')
   @FactoryConverter(request: FormUrlEncodedConverter.requestFactory)

@@ -27,6 +27,11 @@ class RegisterEvent extends AuthEvent {
   List<Object> get props => [name, email, phone, password, cPassword];
 }
 
+class CreateShopEvent extends AuthEvent {
+  @override
+  List<Object> get props => [];
+}
+
 class RefreshTokenEvent extends AuthEvent {
   @override
   List<Object> get props => [];

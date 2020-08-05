@@ -43,3 +43,13 @@ class UnAuthenticatedState extends AuthState {
   @override
   List<Object> get props => [];
 }
+
+class AuthCreateShopState extends AuthState {
+  final UserModel userModel;
+  final String message, title;
+
+  AuthCreateShopState({@required this.userModel, this.message, this.title});
+
+  @override
+  List<Object> get props => [userModel];
+}

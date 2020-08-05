@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_laravel_auth/features/data/models/UserModel.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../core/errors/Failures.dart';
@@ -63,8 +64,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         final String message = failure[1].toString();
         yield AuthErrorState(message: message, title: title);
       }, (user) async* {
-        final authEither = await registerUser(RegisterParams(userModel: user));
-        yield* _getAuthOrFail(authEither);
+        // final authEither = await registerUser(RegisterParams(userModel: user));
+        // yield* _getAuthOrFail(authEither);
+        yield AuthCreateShopState(userModel: user);
       });
     } else if (event is RefreshTokenEvent) {
       final authEither = await refreshAuthentication(NoParams());
