@@ -54,7 +54,7 @@ class _CreateShopBodyState extends State<CreateShopBody> {
                     ),
                     labelText: "Shop Name",
                     labelStyle: kLabelStyle,
-                    errorText: widget.state.title == "name"
+                    errorText: widget.state.title == "shop_name"
                         ? widget.state.message
                         : null,
                     hintText: "Enter shop name",
@@ -77,7 +77,7 @@ class _CreateShopBodyState extends State<CreateShopBody> {
                     ),
                     labelText: "Shop Address",
                     labelStyle: kLabelStyle,
-                    errorText: widget.state.title == "name"
+                    errorText: widget.state.title == "shop_address"
                         ? widget.state.message
                         : null,
                     hintText: "Enter shop address",
@@ -109,7 +109,7 @@ class _CreateShopBodyState extends State<CreateShopBody> {
                             fontFamily: 'OpenSans',
                             fontSize: 12,
                           ),
-                          errorText: widget.state.title == "name"
+                          errorText: widget.state.title == "shop_number"
                               ? widget.state.message
                               : null,
                           hintText: "Enter shop number",
@@ -142,7 +142,7 @@ class _CreateShopBodyState extends State<CreateShopBody> {
                             fontFamily: 'OpenSans',
                             fontSize: 12,
                           ),
-                          errorText: widget.state.title == "name"
+                          errorText: widget.state.title == "mpesa_number"
                               ? widget.state.message
                               : null,
                           hintText: "Enter mpesa number",
@@ -182,6 +182,9 @@ class _CreateShopBodyState extends State<CreateShopBody> {
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
                               ),
+                              errorText: widget.state.title == "allow_import"
+                                  ? widget.state.message
+                                  : null,
                             ),
                             value: allow_imports,
                             items: [
@@ -215,7 +218,7 @@ class _CreateShopBodyState extends State<CreateShopBody> {
                     ),
                     labelText: "Bank Name",
                     labelStyle: kLabelStyle,
-                    errorText: widget.state.title == "name"
+                    errorText: widget.state.title == "bank_name"
                         ? widget.state.message
                         : null,
                     hintText: "Enter bank name",
@@ -246,7 +249,7 @@ class _CreateShopBodyState extends State<CreateShopBody> {
                             fontFamily: 'OpenSans',
                             fontSize: 12,
                           ),
-                          errorText: widget.state.title == "name"
+                          errorText: widget.state.title == "bank_user_name"
                               ? widget.state.message
                               : null,
                           hintText: "Enter bank username",
@@ -278,7 +281,7 @@ class _CreateShopBodyState extends State<CreateShopBody> {
                             fontFamily: 'OpenSans',
                             fontSize: 12,
                           ),
-                          errorText: widget.state.title == "name"
+                          errorText: widget.state.title == "bank_account"
                               ? widget.state.message
                               : null,
                           hintText: "Enter bank account",

@@ -42,4 +42,11 @@ class _$AppApiService extends AppApiService {
     return client.send<dynamic, dynamic>($request,
         requestConverter: FormUrlEncodedConverter.requestFactory);
   }
+
+  @override
+  Future<Response<dynamic>> getDashBoardData() {
+    final $url = '/seller/dashboard';
+    final $request = Request('GET', $url, client.baseUrl);
+    return client.send<dynamic, dynamic>($request);
+  }
 }
