@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_laravel_auth/core/utils/Constants.dart';
 
 import '../../../injection_container.dart';
 import '../bloc/auth_bloc/auth_bloc.dart';
@@ -33,7 +32,7 @@ class _RegisterPageState extends State<RegisterPage> {
           onTap: () => FocusScope.of(context).unfocus(),
           child: SingleChildScrollView(
             child: Padding(
-              padding: EdgeInsets.all(20.0),
+              padding: EdgeInsets.all(10.0),
               child: BlocProvider<AuthBloc>(
                 create: (context) => authBloc,
                 child: BlocBuilder<AuthBloc, AuthState>(
@@ -51,109 +50,10 @@ class _RegisterPageState extends State<RegisterPage> {
                     } else if (state is AuthLoadingState) {
                       return LoadingWidget(height: height);
                     } else if (state is AuthCreateShopState) {
-                      return Column(
-                        children: <Widget>[
-                          Container(
-                            padding: EdgeInsets.symmetric(vertical: 20),
-                            alignment: Alignment.center,
-                            child: Text(
-                              'Create Shop',
-                              style: kHeadingTextStyle,
-                            ),
-                          ),
-                          Container(
-                            width: double.infinity,
-                            child: Column(
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: TextField(
-                                    decoration: InputDecoration(
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                      labelText: "Shop Name",
-                                      labelStyle: kLabelStyle,
-                                      // errorText: widget.state.title == "name"
-                                      //     ? widget.state.message
-                                      //     : null,
-                                      hintText: "Enter shop name",
-                                      hintStyle: kHintTextStyle,
-                                      prefixIcon: Icon(Icons.account_box),
-                                    ),
-                                    onChanged: (value) {
-                                      setState(() {
-                                        // name = value;
-                                      });
-                                    },
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: TextField(
-                                    decoration: InputDecoration(
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                      labelText: "Shop Address",
-                                      labelStyle: kLabelStyle,
-                                      // errorText: widget.state.title == "name"
-                                      //     ? widget.state.message
-                                      //     : null,
-                                      hintText: "Enter shop address",
-                                      hintStyle: kHintTextStyle,
-                                      prefixIcon: Icon(Icons.account_box),
-                                    ),
-                                    onChanged: (value) {
-                                      setState(() {
-                                        // name = value;
-                                      });
-                                    },
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: Container(
-                                    width: double.infinity,
-                                    height: 50,
-                                    decoration: BoxDecoration(
-                                      border: Border.all(),
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    child: Row(
-                                      children: <Widget>[
-                                        // SvgPicture.asset(
-                                        //   svgSrc,
-                                        //   width: size.width * 0.18,
-                                        // ),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 10.0),
-                                          child: DropdownButtonHideUnderline(
-                                            child: DropdownButton(
-                                              value: true,
-                                              items: [
-                                                DropdownMenuItem(
-                                                  child: Text('Yes'),
-                                                  value: true,
-                                                ),
-                                                DropdownMenuItem(
-                                                  child: Text('No'),
-                                                  value: false,
-                                                )
-                                              ],
-                                              onChanged: (value) {},
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
+                      return CreateShopBody(
+                        state: state,
+                        authBloc: authBloc,
+                        user: state.userModel,
                       );
                     } else {
                       return Container(color: Colors.white);

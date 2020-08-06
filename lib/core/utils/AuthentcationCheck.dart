@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 
+import '../../features/data/models/ShopModel.dart';
 import '../../features/data/models/UserModel.dart';
 
 class CheckAuthentication {
@@ -26,6 +27,46 @@ class CheckAuthentication {
         password: password,
       );
       return Right(user);
+    }
+  }
+
+  Either<List, ShopModel> checkShopAuthentiction(
+    String shop_name,
+    String shop_address,
+    String shop_number,
+    String mpesa_number,
+    String allow_imports,
+    String bank_name,
+    String bank_user_name,
+    String bank_account,
+  ) {
+    if (shop_name == null || shop_name.length < 4) {
+      return Left(
+        ["shop_name", "Please input a shop name with more than 4 characters"],
+      );
+    } else if (shop_address == null) {
+      return Left(["shop_address", "Please input a shop address"]);
+    } else if (shop_number == null || shop_number.length < 8) {
+      return Left([
+        "shop_number",
+        "Please input a shop number with more than 8 characters"
+      ]);
+    } else if (mpesa_number == null || mpesa_number.length < 8) {
+      return Left([
+        "mpesa_number",
+        "Please input a mpesa number with more than 8 characters"
+      ]);
+    } else {
+      var shop = ShopModel(
+          shop_name: shop_name,
+          shop_address: shop_address,
+          shop_number: shop_number,
+          allow_imports: allow_imports,
+          mpesa_number: mpesa_number,
+          bank_name: bank_name,
+          bank_account: bank_account,
+          bank_user_name: bank_user_name);
+      return Right(shop);
     }
   }
 

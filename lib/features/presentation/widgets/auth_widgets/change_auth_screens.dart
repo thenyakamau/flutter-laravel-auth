@@ -13,7 +13,7 @@ class ChangeAuthScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.of(context).pushReplacementNamed(route),
+      onTap: () => Navigator.of(context).pushNamed(route),
       child: RichText(
           text: TextSpan(children: [
         TextSpan(

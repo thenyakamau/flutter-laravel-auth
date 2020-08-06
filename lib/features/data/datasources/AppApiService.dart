@@ -24,16 +24,19 @@ abstract class AppApiService extends ChopperService {
   @FactoryConverter(request: FormUrlEncodedConverter.requestFactory)
   Future<Response> refreshUser(@Field('refresh_token') String refreshToken);
 
+  @Get(path: 'dashboard')
+  Future<Response> getDashBoardData();
+
   static AppApiService create() {
     final client = ChopperClient(
-        baseUrl: 'https://3165c8846fa7.ngrok.io',
+        baseUrl: 'https://88b14ec2ef8e.ngrok.io',
         services: [_$AppApiService()],
         converter: JsonConverter(),
         client: http.IOClient(
           HttpClient()..connectionTimeout = const Duration(seconds: 60),
         ),
         interceptors: [
-          HeadersInterceptor({'Cache-Control': 'no-cache'}),
+          HeadersInterceptor({'Accept': 'application/json'}),
           HttpLoggingInterceptor()
         ]);
     return _$AppApiService(client);

@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter_laravel_auth/features/data/models/ShopModel.dart';
 import 'package:meta/meta.dart';
 
 import '../../../core/errors/Exceptions.dart';
@@ -44,10 +45,12 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, ApiSuccess>> registerUser(UserModel userModel) async {
+  Future<Either<Failure, ApiSuccess>> registerUser(
+      UserModel userModel, ShopModel shop) async {
     if (await networkInfo.isConnected) {
       try {
-        final authTokenModel = await remoteDataSource.registerUser(userModel);
+        final authTokenModel =
+            await remoteDataSource.registerUser(userModel, shop);
         localDataSource.cacheAuthToken(authTokenModel);
         ApiSuccessModel apiSuccessModel =
             new ApiSuccessModel(success: true, message: "Register success");

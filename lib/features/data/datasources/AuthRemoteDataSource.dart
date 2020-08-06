@@ -2,11 +2,12 @@ import 'package:meta/meta.dart';
 
 import '../../../core/errors/Exceptions.dart';
 import '../models/AuthTokenModel.dart';
+import '../models/ShopModel.dart';
 import '../models/UserModel.dart';
 import 'AppApiService.dart';
 
 abstract class AuthRemoteDataSource {
-  Future<AuthTokenModel> registerUser(UserModel userModel);
+  Future<AuthTokenModel> registerUser(UserModel userModel, ShopModel shop);
   Future<AuthTokenModel> loginUser(String email, String password);
   Future<AuthTokenModel> refreshUser(AuthTokenModel authTokenModel);
 }
@@ -29,8 +30,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<AuthTokenModel> registerUser(UserModel userModel) async {
-    final response = await apiService.registerUser(userModel.toJson());
+  Future<AuthTokenModel> registerUser(
+      UserModel userModel, ShopModel shopModel) async {
+    final body = {...userModel.toJson(), ...shopModel.toJson()};
+    final response = await apiService.registerUser(body);
     if (response.statusCode == 200) {
       var result = AuthTokenModel.fromJson(response.body);
       return result;

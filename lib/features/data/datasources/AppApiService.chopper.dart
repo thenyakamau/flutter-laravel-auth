@@ -18,7 +18,7 @@ class _$AppApiService extends AppApiService {
 
   @override
   Future<Response<dynamic>> registerUser(Map<String, dynamic> body) {
-    final $url = '/api/register';
+    final $url = '/seller/register';
     final $body = body;
     final $request = Request('POST', $url, client.baseUrl, body: $body);
     return client.send<dynamic, dynamic>($request,
@@ -27,7 +27,7 @@ class _$AppApiService extends AppApiService {
 
   @override
   Future<Response<dynamic>> loginUser(String email, String password) {
-    final $url = '/api/login';
+    final $url = '/seller/login';
     final $body = <String, dynamic>{'username': email, 'password': password};
     final $request = Request('POST', $url, client.baseUrl, body: $body);
     return client.send<dynamic, dynamic>($request,
@@ -36,7 +36,7 @@ class _$AppApiService extends AppApiService {
 
   @override
   Future<Response<dynamic>> refreshUser(String refreshToken) {
-    final $url = '/api/refresh';
+    final $url = '/seller/refresh';
     final $body = <String, dynamic>{'refresh_token': refreshToken};
     final $request = Request('POST', $url, client.baseUrl, body: $body);
     return client.send<dynamic, dynamic>($request,
