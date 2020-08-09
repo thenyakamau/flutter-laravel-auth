@@ -44,9 +44,10 @@ class _$AppApiService extends AppApiService {
   }
 
   @override
-  Future<Response<dynamic>> getDashBoardData() {
+  Future<Response<dynamic>> getDashBoardData([String authentication]) {
     final $url = '/seller/dashboard';
-    final $request = Request('GET', $url, client.baseUrl);
+    final $headers = {'Authorization': authentication};
+    final $request = Request('GET', $url, client.baseUrl, headers: $headers);
     return client.send<dynamic, dynamic>($request);
   }
 }

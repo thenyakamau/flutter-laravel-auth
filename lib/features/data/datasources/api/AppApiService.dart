@@ -25,11 +25,13 @@ abstract class AppApiService extends ChopperService {
   Future<Response> refreshUser(@Field('refresh_token') String refreshToken);
 
   @Get(path: 'dashboard')
-  Future<Response> getDashBoardData();
+  Future<Response> getDashBoardData([
+    @Header('Authorization') String authentication,
+  ]);
 
   static AppApiService create() {
     final client = ChopperClient(
-        baseUrl: 'https://88b14ec2ef8e.ngrok.io',
+        baseUrl: 'https://ee8f4fbf6356.ngrok.io',
         services: [_$AppApiService()],
         converter: JsonConverter(),
         client: http.IOClient(

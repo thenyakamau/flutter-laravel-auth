@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter_laravel_auth/features/data/models/ShopModel.dart';
 import 'package:meta/meta.dart';
 
 import '../../../core/errors/Exceptions.dart';
@@ -7,9 +6,10 @@ import '../../../core/errors/Failures.dart';
 import '../../../core/network/NetworkInfo.dart';
 import '../../domain/entities/ApiSuccess.dart';
 import '../../domain/repositories/AuthRepository.dart';
-import '../datasources/AuthLocalDataSource.dart';
-import '../datasources/AuthRemoteDataSource.dart';
+import '../datasources/auth/AuthLocalDataSource.dart';
+import '../datasources/auth/AuthRemoteDataSource.dart';
 import '../models/ApiSuccessModel.dart';
+import '../models/ShopModel.dart';
 import '../models/UserModel.dart';
 
 class AuthRepositoryImpl implements AuthRepository {

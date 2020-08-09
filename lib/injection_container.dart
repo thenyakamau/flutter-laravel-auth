@@ -4,9 +4,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/network/NetworkInfo.dart';
 import 'core/utils/AuthentcationCheck.dart';
-import 'features/data/datasources/AppApiService.dart';
-import 'features/data/datasources/AuthLocalDataSource.dart';
-import 'features/data/datasources/AuthRemoteDataSource.dart';
+import 'features/data/datasources/api/AppApiService.dart';
+import 'features/data/datasources/auth/AuthLocalDataSource.dart';
+import 'features/data/datasources/auth/AuthRemoteDataSource.dart';
 import 'features/data/repositories/AuthRepositoryImpl.dart';
 import 'features/domain/repositories/AuthRepository.dart';
 import 'features/domain/usecases/LoginUser.dart';

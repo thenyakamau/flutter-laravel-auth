@@ -25,15 +25,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Laravel',
+      title: 'E-Commerce',
       theme: ThemeData(
-        primaryColor: kPrimaryColor,
+        primaryColor: Colors.blueAccent,
         scaffoldBackgroundColor: Colors.white,
         textTheme: TextTheme(
             bodyText1: TextStyle(color: ksecondaryColor),
             bodyText2: TextStyle(color: ksecondaryColor)),
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        primarySwatch: Colors.grey,
+        // primarySwatch: Colors.blueAccent,
         primaryTextTheme: TextTheme(headline6: TextStyle(color: Colors.white)),
       ),
       initialRoute: '/',

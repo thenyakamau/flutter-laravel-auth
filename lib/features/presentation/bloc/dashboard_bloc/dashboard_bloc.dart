@@ -12,5 +12,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   @override
   Stream<DashboardState> mapEventToState(
     DashboardEvent event,
-  ) async* {}
+  ) async* {
+    if (event is GetDashBoardDetailsEvent) {}
+  }
 }
