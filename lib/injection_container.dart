@@ -4,21 +4,29 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/network/NetworkInfo.dart';
 import 'core/utils/AuthentcationCheck.dart';
+import 'features/data/datasources/Home/HomeLocalDataSource.dart';
+import 'features/data/datasources/Home/HomeRemoteDataSource.dart';
 import 'features/data/datasources/api/AppApiService.dart';
 import 'features/data/datasources/auth/AuthLocalDataSource.dart';
 import 'features/data/datasources/auth/AuthRemoteDataSource.dart';
 import 'features/data/repositories/AuthRepositoryImpl.dart';
+import 'features/data/repositories/HomeRepositoryImpl.dart';
 import 'features/domain/repositories/AuthRepository.dart';
+import 'features/domain/repositories/HomeRepository.dart';
+import 'features/domain/usecases/DashBoardDetails.dart';
 import 'features/domain/usecases/LoginUser.dart';
 import 'features/domain/usecases/RefreshAuthentication.dart';
 import 'features/domain/usecases/RegisterUser.dart';
 import 'features/presentation/bloc/auth_bloc/auth_bloc.dart';
+import 'features/presentation/bloc/dashboard_bloc/dashboard_bloc.dart';
 
 final sl = GetIt.instance;
 
 Future<void> init() async {
   _initializeAuth();
   _initializeAuthRepository();
+  _initializeHome();
+  _initializeHomeRepository();
 
   //!core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
@@ -64,4 +72,30 @@ void _initializeAuth() {
   sl.registerLazySingleton(() => LoginUser(authRepository: sl()));
   sl.registerLazySingleton(() => RegisterUser(authRepository: sl()));
   sl.registerLazySingleton(() => RefreshAuthentication(authRepository: sl()));
+}
+
+void _initializeHomeRepository() {
+  sl.registerLazySingleton<HomeRepository>(
+    () => HomeRepositoryImpl(
+      authLocalDataSource: sl(),
+      networkInfo: sl(),
+      homeRemoteDataSource: sl(),
+      localDataSource: sl(),
+    ),
+  );
+  sl.registerLazySingleton<HomeRemoteDataSource>(
+    () => HomeRemoteDataSourceImpl(
+      apiService: sl(),
+    ),
+  );
+  sl.registerLazySingleton<HomeLocalDataSource>(
+    () => HomeLocalDataSourceImpl(
+      sharedPreferences: sl(),
+    ),
+  );
+}
+
+void _initializeHome() {
+  sl.registerFactory(() => DashboardBloc(dashBoardDetails: sl()));
+  sl.registerLazySingleton(() => DashBoardDetails(homeRepository: sl()));
 }

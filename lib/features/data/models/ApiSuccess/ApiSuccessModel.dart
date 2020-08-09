@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
 
-import '../../domain/entities/ApiSuccess.dart';
+import '../../../domain/entities/ApiSuccess.dart';
 
 part 'ApiSuccessModel.g.dart';
 

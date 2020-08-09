@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 
-import '../../features/data/models/ShopModel.dart';
-import '../../features/data/models/UserModel.dart';
+import '../../features/data/models/Shop/ShopModel.dart';
+import '../../features/data/models/User/UserModel.dart';
 
 class CheckAuthentication {
   Either<List, UserModel> checkRegAuthentication(String name, String email,

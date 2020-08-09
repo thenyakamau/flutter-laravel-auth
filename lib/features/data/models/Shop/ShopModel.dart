@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
 
-import '../../domain/entities/Shop.dart';
+import '../../../domain/entities/Shop.dart';
 
 part 'ShopModel.g.dart';
 

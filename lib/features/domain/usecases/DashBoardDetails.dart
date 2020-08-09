@@ -1,9 +1,17 @@
-import 'package:flutter_laravel_auth/core/errors/Failures.dart';
 import 'package:dartz/dartz.dart';
-import 'package:flutter_laravel_auth/core/usecases/UseCases.dart';
-import 'package:flutter_laravel_auth/features/data/models/DashBoardModel.dart';
+import 'package:meta/meta.dart';
 
-class DashBoardDetails extends UseCase<DashBoardModel, NoParams> {
+import '../../../core/errors/Failures.dart';
+import '../../../core/usecases/UseCases.dart';
+import '../entities/DashBoard.dart';
+import '../repositories/HomeRepository.dart';
+
+class DashBoardDetails extends UseCase<DashBoard, NoParams> {
+  final HomeRepository homeRepository;
+
+  DashBoardDetails({@required this.homeRepository});
   @override
-  Future<Either<Failure, DashBoardModel>> call(NoParams params) {}
+  Future<Either<Failure, DashBoard>> call(NoParams params) {
+    return homeRepository.getDashBoardDetails();
+  }
 }

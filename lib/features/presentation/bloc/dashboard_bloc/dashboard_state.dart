@@ -15,11 +15,17 @@ class DashBoardLoadingState extends DashboardState {
 }
 
 class DashBoardLoadedState extends DashboardState {
+  final DashBoard dashBoard;
+
+  DashBoardLoadedState({@required this.dashBoard});
   @override
-  List<Object> get props => [];
+  List<Object> get props => [dashBoard];
 }
 
 class DashBoardErrorState extends DashboardState {
+  final String message;
+
+  DashBoardErrorState({@required this.message});
   @override
-  List<Object> get props => [];
+  List<Object> get props => [message];
 }

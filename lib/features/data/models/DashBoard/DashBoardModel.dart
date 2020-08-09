@@ -1,8 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
 
-import '../../domain/entities/DashBoard.dart';
-import 'UserDashBoardModel.dart';
+import '../../../domain/entities/DashBoard.dart';
+import '../UserDashBoard/UserDashBoardModel.dart';
 
 part 'DashBoardModel.g.dart';
 

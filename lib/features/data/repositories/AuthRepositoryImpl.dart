@@ -8,9 +8,9 @@ import '../../domain/entities/ApiSuccess.dart';
 import '../../domain/repositories/AuthRepository.dart';
 import '../datasources/auth/AuthLocalDataSource.dart';
 import '../datasources/auth/AuthRemoteDataSource.dart';
-import '../models/ApiSuccessModel.dart';
-import '../models/ShopModel.dart';
-import '../models/UserModel.dart';
+import '../models/ApiSuccess/ApiSuccessModel.dart';
+import '../models/Shop/ShopModel.dart';
+import '../models/User/UserModel.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSource remoteDataSource;

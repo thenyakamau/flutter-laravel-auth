@@ -4,8 +4,8 @@ import 'package:meta/meta.dart';
 
 import '../../../core/errors/Failures.dart';
 import '../../../core/usecases/UseCases.dart';
-import '../../data/models/ShopModel.dart';
-import '../../data/models/UserModel.dart';
+import '../../data/models/Shop/ShopModel.dart';
+import '../../data/models/User/UserModel.dart';
 import '../entities/ApiSuccess.dart';
 import '../repositories/AuthRepository.dart';
 

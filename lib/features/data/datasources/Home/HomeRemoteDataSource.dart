@@ -2,8 +2,8 @@ import 'package:meta/meta.dart';
 
 import '../../../../core/errors/Exceptions.dart';
 import '../../../domain/entities/DashBoard.dart';
-import '../../models/AuthTokenModel.dart';
-import '../../models/DashBoardModel.dart';
+import '../../models/AuthToken/AuthTokenModel.dart';
+import '../../models/DashBoard/DashBoardModel.dart';
 import '../api/AppApiService.dart';
 
 abstract class HomeRemoteDataSource {

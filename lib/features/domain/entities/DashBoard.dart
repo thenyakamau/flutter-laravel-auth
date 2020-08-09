@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-import '../../data/models/UserDashBoardModel.dart';
+import '../../data/models/UserDashBoard/UserDashBoardModel.dart';
 
 class DashBoard extends Equatable {
   final int countproducts;

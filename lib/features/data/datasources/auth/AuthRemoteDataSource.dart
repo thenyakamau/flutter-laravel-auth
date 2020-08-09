@@ -1,9 +1,9 @@
 import 'package:meta/meta.dart';
 
 import '../../../../core/errors/Exceptions.dart';
-import '../../models/AuthTokenModel.dart';
-import '../../models/ShopModel.dart';
-import '../../models/UserModel.dart';
+import '../../models/AuthToken/AuthTokenModel.dart';
+import '../../models/Shop/ShopModel.dart';
+import '../../models/User/UserModel.dart';
 import '../api/AppApiService.dart';
 
 abstract class AuthRemoteDataSource {

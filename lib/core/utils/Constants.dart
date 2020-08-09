@@ -54,3 +54,4 @@ const String CACHE_FAILURE_MESSAGE = "Cache Failure";
 const String INPUT_FAILURE_MESSAGE = "Input Failure";
 
 const String CACHE_AUTH_TOKEN = "CACHE_AUTH_TOKEN";
+const String CACHE_DASH_BOARD_DATA = "CACHE_DASH_BOARD_DATA";

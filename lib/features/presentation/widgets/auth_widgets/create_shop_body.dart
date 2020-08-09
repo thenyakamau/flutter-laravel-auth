@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils/Constants.dart';
-import '../../../data/models/UserModel.dart';
+import '../../../data/models/User/UserModel.dart';
 import '../../bloc/auth_bloc/auth_bloc.dart';
 import '../button_widget.dart';
 

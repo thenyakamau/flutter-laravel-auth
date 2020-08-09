@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/errors/Exceptions.dart';
 import '../../../../core/utils/Constants.dart';
-import '../../models/AuthTokenModel.dart';
+import '../../models/AuthToken/AuthTokenModel.dart';
 
 abstract class AuthLocalDataSource {
   Future<void> cacheAuthToken(AuthTokenModel authTokenModel);

@@ -9,7 +9,7 @@ import '../../../../core/errors/Failures.dart';
 import '../../../../core/usecases/UseCases.dart';
 import '../../../../core/utils/AuthentcationCheck.dart';
 import '../../../../core/utils/Constants.dart';
-import '../../../data/models/UserModel.dart';
+import '../../../data/models/User/UserModel.dart';
 import '../../../domain/entities/ApiSuccess.dart';
 import '../../../domain/usecases/LoginUser.dart';
 import '../../../domain/usecases/RefreshAuthentication.dart';
