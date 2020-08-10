@@ -18,7 +18,7 @@ import 'features/domain/usecases/LoginUser.dart';
 import 'features/domain/usecases/RefreshAuthentication.dart';
 import 'features/domain/usecases/RegisterUser.dart';
 import 'features/presentation/bloc/auth_bloc/auth_bloc.dart';
-import 'features/presentation/bloc/dashboard_bloc/dashboard_bloc.dart';
+import 'features/presentation/bloc/home_bloc/home_bloc.dart';
 
 final sl = GetIt.instance;
 
@@ -96,6 +96,6 @@ void _initializeHomeRepository() {
 }
 
 void _initializeHome() {
-  sl.registerFactory(() => DashboardBloc(dashBoardDetails: sl()));
+  sl.registerFactory(() => HomeBloc(dashBoardDetails: sl()));
   sl.registerLazySingleton(() => DashBoardDetails(homeRepository: sl()));
 }

@@ -64,8 +64,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         final String message = failure[1].toString();
         yield AuthErrorState(message: message, title: title);
       }, (user) async* {
-        // final authEither = await registerUser(RegisterParams(userModel: user));
-        // yield* _getAuthOrFail(authEither);
         yield AuthCreateShopState(userModel: user);
       });
     } else if (event is CreateShopEvent) {

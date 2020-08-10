@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:chopper/chopper.dart';
 import 'package:http/io_client.dart' as http;
 
+import '../../../../core/utils/Constants.dart';
+
 part 'AppApiService.chopper.dart';
 
 @ChopperApi(baseUrl: '/seller/')
@@ -31,7 +33,7 @@ abstract class AppApiService extends ChopperService {
 
   static AppApiService create() {
     final client = ChopperClient(
-        baseUrl: 'https://ee8f4fbf6356.ngrok.io',
+        baseUrl: BASE_URL,
         services: [_$AppApiService()],
         converter: JsonConverter(),
         client: http.IOClient(

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../features/presentation/pages/AddProductPage.dart';
 import '../../features/presentation/pages/HomePage.dart';
 import '../../features/presentation/pages/LoginPage.dart';
 import '../../features/presentation/pages/RegisterPage.dart';
@@ -17,6 +18,8 @@ class RoutesGenerator {
         return CupertinoPageRoute(builder: (_) => HomePage());
       case '/login':
         return CupertinoPageRoute(builder: (_) => LoginPage());
+      case '/add_product':
+        return CupertinoPageRoute(builder: (_) => AddProductPage());
       default:
         // If there is no such named route in the switch statement, e.g. /third
         return _errorRoute();
