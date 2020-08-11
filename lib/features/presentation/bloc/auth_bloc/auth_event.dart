@@ -67,3 +67,8 @@ class RefreshTokenEvent extends AuthEvent {
   @override
   List<Object> get props => [];
 }
+
+class SplashRefreshEvent extends AuthEvent {
+  @override
+  List<Object> get props => [];
+}

@@ -18,7 +18,7 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
     authBloc = sl<AuthBloc>();
-    authBloc.add(RefreshTokenEvent());
+    authBloc.add(SplashRefreshEvent());
   }
 
   @override

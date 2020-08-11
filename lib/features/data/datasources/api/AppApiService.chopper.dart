@@ -44,6 +44,15 @@ class _$AppApiService extends AppApiService {
   }
 
   @override
+  Future<Response<dynamic>> splashRefresh(String refreshToken) {
+    final $url = '/seller/splashRefresh';
+    final $body = <String, dynamic>{'refresh_token': refreshToken};
+    final $request = Request('POST', $url, client.baseUrl, body: $body);
+    return client.send<dynamic, dynamic>($request,
+        requestConverter: FormUrlEncodedConverter.requestFactory);
+  }
+
+  @override
   Future<Response<dynamic>> getDashBoardData([String authentication]) {
     final $url = '/seller/dashboard';
     final $headers = {'Authorization': authentication};

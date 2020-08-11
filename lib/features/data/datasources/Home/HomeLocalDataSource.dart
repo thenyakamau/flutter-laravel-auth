@@ -31,7 +31,7 @@ class HomeLocalDataSourceImpl implements HomeLocalDataSource {
   Future<DashBoardModel> getDashBoardCache() {
     final dashBoardData = sharedPreferences.get(CACHE_DASH_BOARD_DATA);
     if (dashBoardData != null) {
-      Future.value(DashBoardModel.fromJson(json.decode(dashBoardData)));
+      return Future.value(DashBoardModel.fromJson(json.decode(dashBoardData)));
     } else {
       return null;
     }

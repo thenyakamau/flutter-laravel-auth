@@ -1,3 +1,4 @@
+import 'package:chopper/chopper.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../core/errors/Exceptions.dart';
@@ -10,6 +11,7 @@ abstract class AuthRemoteDataSource {
   Future<AuthTokenModel> registerUser(UserModel userModel, ShopModel shop);
   Future<AuthTokenModel> loginUser(String email, String password);
   Future<AuthTokenModel> refreshUser(AuthTokenModel authTokenModel);
+  Future<Response> splashRefresh(AuthTokenModel authTokenModel);
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -48,6 +50,18 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     if (response.statusCode == 200) {
       var result = AuthTokenModel.fromJson(response.body);
       return result;
+    } else {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<Response> splashRefresh(AuthTokenModel authTokenModel) async {
+    final response =
+        await apiService.splashRefresh(authTokenModel.refresh_token);
+    if (response.statusCode == 200) {
+      print(response.body['businessSettings']);
+      return response;
     } else {
       throw ServerException();
     }

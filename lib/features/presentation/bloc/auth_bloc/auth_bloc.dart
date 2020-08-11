@@ -14,6 +14,7 @@ import '../../../domain/entities/ApiSuccess.dart';
 import '../../../domain/usecases/LoginUser.dart';
 import '../../../domain/usecases/RefreshAuthentication.dart';
 import '../../../domain/usecases/RegisterUser.dart';
+import '../../../domain/usecases/SplashRefresh.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
@@ -23,11 +24,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final LoginUser loginUser;
   final RegisterUser registerUser;
   final RefreshAuthentication refreshAuthentication;
+  final SplashRefresh splashRefresh;
   AuthBloc({
     @required this.checkAuthentication,
     @required this.loginUser,
     @required this.registerUser,
     @required this.refreshAuthentication,
+    @required this.splashRefresh,
   }) : super(AuthInitial());
 
   @override
@@ -91,6 +94,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       });
     } else if (event is RefreshTokenEvent) {
       final authEither = await refreshAuthentication(NoParams());
+      yield* authEither.fold((failure) async* {
+        if (failure is UnAuthenticatedFailure) {
+          yield UnAuthenticatedState();
+        } else {
+          yield AuthErrorState(
+              message: _mapFailureToMessage(failure), title: "Error");
+        }
+      }, (success) async* {
+        yield AuthLoadedState(message: success.message);
+      });
+    } else if (event is SplashRefreshEvent) {
+      final authEither = await splashRefresh(NoParams());
       yield* authEither.fold((failure) async* {
         if (failure is UnAuthenticatedFailure) {
           yield UnAuthenticatedState();

@@ -17,6 +17,7 @@ import 'features/domain/usecases/DashBoardDetails.dart';
 import 'features/domain/usecases/LoginUser.dart';
 import 'features/domain/usecases/RefreshAuthentication.dart';
 import 'features/domain/usecases/RegisterUser.dart';
+import 'features/domain/usecases/SplashRefresh.dart';
 import 'features/presentation/bloc/auth_bloc/auth_bloc.dart';
 import 'features/presentation/bloc/home_bloc/home_bloc.dart';
 
@@ -66,12 +67,14 @@ void _initializeAuth() {
       loginUser: sl(),
       registerUser: sl(),
       refreshAuthentication: sl(),
+      splashRefresh: sl(),
     ),
   );
   sl.registerLazySingleton(() => CheckAuthentication());
   sl.registerLazySingleton(() => LoginUser(authRepository: sl()));
   sl.registerLazySingleton(() => RegisterUser(authRepository: sl()));
   sl.registerLazySingleton(() => RefreshAuthentication(authRepository: sl()));
+  sl.registerLazySingleton(() => SplashRefresh(authRepository: sl()));
 }
 
 void _initializeHomeRepository() {

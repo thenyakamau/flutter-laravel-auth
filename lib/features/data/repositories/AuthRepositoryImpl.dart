@@ -89,4 +89,34 @@ class AuthRepositoryImpl implements AuthRepository {
       return Left(UnAuthenticatedFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, ApiSuccess>> splashRefresh() async {
+    final authTokenModel = await localDataSource.getAuthToken();
+    if (authTokenModel != null) {
+      if (await networkInfo.isConnected) {
+        try {
+          // final authTokenObject =
+          //     await remoteDataSource.refreshUser(authTokenModel);
+          // localDataSource.cacheAuthToken(authTokenObject);
+          // ApiSuccessModel apiSuccessModel =
+          //     new ApiSuccessModel(success: true, message: "Refresh success");
+          // return Right(apiSuccessModel);
+          final responseObject =
+              await remoteDataSource.splashRefresh(authTokenModel);
+          // print(responseObject.body['businessSettings']);
+          return Right(
+              new ApiSuccessModel(success: true, message: "Refresh success"));
+        } on ServerException {
+          return Left(ServerFailure());
+        } on CacheException {
+          return Left(CacheFailure());
+        }
+      } else {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(UnAuthenticatedFailure());
+    }
+  }
 }

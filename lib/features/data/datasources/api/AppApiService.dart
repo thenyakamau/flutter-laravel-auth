@@ -26,6 +26,10 @@ abstract class AppApiService extends ChopperService {
   @FactoryConverter(request: FormUrlEncodedConverter.requestFactory)
   Future<Response> refreshUser(@Field('refresh_token') String refreshToken);
 
+  @Post(path: 'splashRefresh')
+  @FactoryConverter(request: FormUrlEncodedConverter.requestFactory)
+  Future<Response> splashRefresh(@Field('refresh_token') String refreshToken);
+
   @Get(path: 'dashboard')
   Future<Response> getDashBoardData([
     @Header('Authorization') String authentication,

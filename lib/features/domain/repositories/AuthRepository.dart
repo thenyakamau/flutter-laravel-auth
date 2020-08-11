@@ -10,4 +10,5 @@ abstract class AuthRepository {
       UserModel userModel, ShopModel shop);
   Future<Either<Failure, ApiSuccess>> loginUser(String email, String password);
   Future<Either<Failure, ApiSuccess>> refreshUser();
+  Future<Either<Failure, ApiSuccess>> splashRefresh();
 }
