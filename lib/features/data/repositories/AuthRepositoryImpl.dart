@@ -1,4 +1,6 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter_laravel_auth/features/data/models/AuthToken/AuthTokenModel.dart';
+import 'package:flutter_laravel_auth/features/data/models/BusinessSettings/BusinessSettingsModel.dart';
 import 'package:meta/meta.dart';
 
 import '../../../core/errors/Exceptions.dart';
@@ -96,15 +98,13 @@ class AuthRepositoryImpl implements AuthRepository {
     if (authTokenModel != null) {
       if (await networkInfo.isConnected) {
         try {
-          // final authTokenObject =
-          //     await remoteDataSource.refreshUser(authTokenModel);
-          // localDataSource.cacheAuthToken(authTokenObject);
-          // ApiSuccessModel apiSuccessModel =
-          //     new ApiSuccessModel(success: true, message: "Refresh success");
-          // return Right(apiSuccessModel);
-          final responseObject =
-              await remoteDataSource.splashRefresh(authTokenModel);
-          // print(responseObject.body['businessSettings']);
+          final response = await remoteDataSource.splashRefresh(authTokenModel);
+          localDataSource.cacheAuthToken(
+              AuthTokenModel.fromJson(response.body['refresh_token']));
+          List<BusinessSettingsModel> settings =
+              (response.body['businessSettings'] as List)
+                  .map((e) => BusinessSettingsModel.fromJson(e))
+                  .toList();
           return Right(
               new ApiSuccessModel(success: true, message: "Refresh success"));
         } on ServerException {

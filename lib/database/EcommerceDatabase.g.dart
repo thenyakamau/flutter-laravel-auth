@@ -497,7 +497,7 @@ class BusinessSettingTable extends DataClass
     implements Insertable<BusinessSettingTable> {
   final int id;
   final String type;
-  final int value;
+  final String value;
   final String created_at;
   final String updated_at;
   BusinessSettingTable(
@@ -515,7 +515,8 @@ class BusinessSettingTable extends DataClass
     return BusinessSettingTable(
       id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
       type: stringType.mapFromDatabaseResponse(data['${effectivePrefix}type']),
-      value: intType.mapFromDatabaseResponse(data['${effectivePrefix}value']),
+      value:
+          stringType.mapFromDatabaseResponse(data['${effectivePrefix}value']),
       created_at: stringType
           .mapFromDatabaseResponse(data['${effectivePrefix}created_at']),
       updated_at: stringType
@@ -532,7 +533,7 @@ class BusinessSettingTable extends DataClass
       map['type'] = Variable<String>(type);
     }
     if (!nullToAbsent || value != null) {
-      map['value'] = Variable<int>(value);
+      map['value'] = Variable<String>(value);
     }
     if (!nullToAbsent || created_at != null) {
       map['created_at'] = Variable<String>(created_at);
@@ -564,7 +565,7 @@ class BusinessSettingTable extends DataClass
     return BusinessSettingTable(
       id: serializer.fromJson<int>(json['id']),
       type: serializer.fromJson<String>(json['type']),
-      value: serializer.fromJson<int>(json['value']),
+      value: serializer.fromJson<String>(json['value']),
       created_at: serializer.fromJson<String>(json['created_at']),
       updated_at: serializer.fromJson<String>(json['updated_at']),
     );
@@ -575,7 +576,7 @@ class BusinessSettingTable extends DataClass
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
       'type': serializer.toJson<String>(type),
-      'value': serializer.toJson<int>(value),
+      'value': serializer.toJson<String>(value),
       'created_at': serializer.toJson<String>(created_at),
       'updated_at': serializer.toJson<String>(updated_at),
     };
@@ -584,7 +585,7 @@ class BusinessSettingTable extends DataClass
   BusinessSettingTable copyWith(
           {int id,
           String type,
-          int value,
+          String value,
           String created_at,
           String updated_at}) =>
       BusinessSettingTable(
@@ -628,7 +629,7 @@ class BusinessSettingsTableCompanion
     extends UpdateCompanion<BusinessSettingTable> {
   final Value<int> id;
   final Value<String> type;
-  final Value<int> value;
+  final Value<String> value;
   final Value<String> created_at;
   final Value<String> updated_at;
   const BusinessSettingsTableCompanion({
@@ -641,7 +642,7 @@ class BusinessSettingsTableCompanion
   BusinessSettingsTableCompanion.insert({
     this.id = const Value.absent(),
     @required String type,
-    @required int value,
+    @required String value,
     @required String created_at,
     @required String updated_at,
   })  : type = Value(type),
@@ -651,7 +652,7 @@ class BusinessSettingsTableCompanion
   static Insertable<BusinessSettingTable> custom({
     Expression<int> id,
     Expression<String> type,
-    Expression<int> value,
+    Expression<String> value,
     Expression<String> created_at,
     Expression<String> updated_at,
   }) {
@@ -667,7 +668,7 @@ class BusinessSettingsTableCompanion
   BusinessSettingsTableCompanion copyWith(
       {Value<int> id,
       Value<String> type,
-      Value<int> value,
+      Value<String> value,
       Value<String> created_at,
       Value<String> updated_at}) {
     return BusinessSettingsTableCompanion(
@@ -689,7 +690,7 @@ class BusinessSettingsTableCompanion
       map['type'] = Variable<String>(type.value);
     }
     if (value.present) {
-      map['value'] = Variable<int>(value.value);
+      map['value'] = Variable<String>(value.value);
     }
     if (created_at.present) {
       map['created_at'] = Variable<String>(created_at.value);
@@ -743,11 +744,11 @@ class $BusinessSettingsTableTable extends BusinessSettingsTable
   }
 
   final VerificationMeta _valueMeta = const VerificationMeta('value');
-  GeneratedIntColumn _value;
+  GeneratedTextColumn _value;
   @override
-  GeneratedIntColumn get value => _value ??= _constructValue();
-  GeneratedIntColumn _constructValue() {
-    return GeneratedIntColumn(
+  GeneratedTextColumn get value => _value ??= _constructValue();
+  GeneratedTextColumn _constructValue() {
+    return GeneratedTextColumn(
       'value',
       $tableName,
       false,
