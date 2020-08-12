@@ -1,6 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter_laravel_auth/features/data/models/AuthToken/AuthTokenModel.dart';
-import 'package:flutter_laravel_auth/features/data/models/BusinessSettings/BusinessSettingsModel.dart';
 import 'package:meta/meta.dart';
 
 import '../../../core/errors/Exceptions.dart';
@@ -11,6 +9,8 @@ import '../../domain/repositories/AuthRepository.dart';
 import '../datasources/auth/AuthLocalDataSource.dart';
 import '../datasources/auth/AuthRemoteDataSource.dart';
 import '../models/ApiSuccess/ApiSuccessModel.dart';
+import '../models/AuthToken/AuthTokenModel.dart';
+import '../models/BusinessSettings/BusinessSettingsModel.dart';
 import '../models/Shop/ShopModel.dart';
 import '../models/User/UserModel.dart';
 
@@ -28,22 +28,23 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Either<Failure, ApiSuccess>> loginUser(
       String email, String password) async {
-    if (await networkInfo.isConnected) {
-      try {
-        final authTokenModel =
-            await remoteDataSource.loginUser(email, password);
-        localDataSource.cacheAuthToken(authTokenModel);
-        ApiSuccessModel apiSuccessModel =
-            new ApiSuccessModel(success: true, message: "Login success");
-        return Right(apiSuccessModel);
-      } on ServerException {
-        return Left(ServerFailure());
-      } on CacheException {
-        return Left(CacheFailure());
-      }
-    } else {
+    // if (await networkInfo.isConnected) {
+    try {
+      final authTokenModel = await remoteDataSource.loginUser(email, password);
+      localDataSource.cacheAuthToken(authTokenModel);
+      ApiSuccessModel apiSuccessModel =
+          new ApiSuccessModel(success: true, message: "Login success");
+      return Right(apiSuccessModel);
+    } on ServerException {
+      print("server exception");
       return Left(ServerFailure());
+    } on CacheException {
+      return Left(CacheFailure());
     }
+    // } else {
+    //   print("internet exception");
+    //   return Left(ServerFailure());
+    // }
   }
 
   @override
@@ -105,6 +106,7 @@ class AuthRepositoryImpl implements AuthRepository {
               (response.body['businessSettings'] as List)
                   .map((e) => BusinessSettingsModel.fromJson(e))
                   .toList();
+          localDataSource.cacheBusinessSettings(settings);
           return Right(
               new ApiSuccessModel(success: true, message: "Refresh success"));
         } on ServerException {

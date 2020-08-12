@@ -55,4 +55,4 @@ const String INPUT_FAILURE_MESSAGE = "Input Failure";
 
 const String CACHE_AUTH_TOKEN = "CACHE_AUTH_TOKEN";
 const String CACHE_DASH_BOARD_DATA = "CACHE_DASH_BOARD_DATA";
-const String BASE_URL = "https://c7bfc31aac0e.ngrok.io";
+const String BASE_URL = "https://6a2b5325684a.ngrok.io";

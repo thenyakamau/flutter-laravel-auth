@@ -56,14 +56,8 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
     for (var i = 0; i < businessSettings.length; i++) {
       try {
         BusinessSettingsModel e = businessSettings[i];
-        await businessSettingsDao
-            .insertBusinessSetting(new BusinessSettingTable(
-          id: e.id,
-          type: e.type,
-          value: e.value,
-          created_at: e.createdAt,
-          updated_at: e.updatedAt,
-        ));
+        await businessSettingsDao.insertBusinessSetting(
+            new BusinessSettingTable(id: e.id, type: e.type, value: e.value));
       } catch (e) {
         throw CacheException();
       }

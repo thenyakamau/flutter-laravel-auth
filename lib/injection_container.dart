@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/network/NetworkInfo.dart';
 import 'core/utils/AuthentcationCheck.dart';
+import 'database/EcommerceDatabase.dart';
 import 'features/data/datasources/Home/HomeLocalDataSource.dart';
 import 'features/data/datasources/Home/HomeRemoteDataSource.dart';
 import 'features/data/datasources/api/AppApiService.dart';
@@ -28,6 +29,7 @@ Future<void> init() async {
   _initializeAuthRepository();
   _initializeHome();
   _initializeHomeRepository();
+  _initializeDatabase();
 
   //!core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
@@ -56,6 +58,7 @@ void _initializeAuthRepository() {
   sl.registerLazySingleton<AuthLocalDataSource>(
     () => AuthLocalDataSourceImpl(
       sharedPreferences: sl(),
+      businessSettingsDao: sl(),
     ),
   );
 }
@@ -101,4 +104,8 @@ void _initializeHomeRepository() {
 void _initializeHome() {
   sl.registerFactory(() => HomeBloc(dashBoardDetails: sl()));
   sl.registerLazySingleton(() => DashBoardDetails(homeRepository: sl()));
+}
+
+void _initializeDatabase() {
+  sl.registerLazySingleton(() => EcommerceDatabase().businessSettingsDao);
 }

@@ -12,8 +12,6 @@ BusinessSettingsModel _$BusinessSettingsModelFromJson(
     id: json['id'] as int,
     type: json['type'] as String,
     value: json['value'] as String,
-    createdAt: json['createdAt'] as String,
-    updatedAt: json['updatedAt'] as String,
   );
 }
 
@@ -23,6 +21,4 @@ Map<String, dynamic> _$BusinessSettingsModelToJson(
       'id': instance.id,
       'type': instance.type,
       'value': instance.value,
-      'createdAt': instance.createdAt,
-      'updatedAt': instance.updatedAt,
     };

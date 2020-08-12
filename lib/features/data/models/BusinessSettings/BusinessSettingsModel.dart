@@ -9,22 +9,12 @@ class BusinessSettingsModel extends BusinessSettings {
   final int id;
   final String type;
   final String value;
-  final String createdAt;
-  final String updatedAt;
 
   BusinessSettingsModel({
     @required this.id,
     @required this.type,
     @required this.value,
-    @required this.createdAt,
-    @required this.updatedAt,
-  }) : super(
-          id: id,
-          type: type,
-          value: value,
-          createdAt: createdAt,
-          updatedAt: updatedAt,
-        );
+  }) : super(id: id, type: type, value: value);
 
   factory BusinessSettingsModel.fromJson(Map<String, dynamic> json) =>
       _$BusinessSettingsModelFromJson(json);

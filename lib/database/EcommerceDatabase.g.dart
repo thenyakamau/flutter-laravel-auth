@@ -498,14 +498,8 @@ class BusinessSettingTable extends DataClass
   final int id;
   final String type;
   final String value;
-  final String created_at;
-  final String updated_at;
   BusinessSettingTable(
-      {@required this.id,
-      @required this.type,
-      @required this.value,
-      @required this.created_at,
-      @required this.updated_at});
+      {@required this.id, @required this.type, @required this.value});
   factory BusinessSettingTable.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
@@ -517,10 +511,6 @@ class BusinessSettingTable extends DataClass
       type: stringType.mapFromDatabaseResponse(data['${effectivePrefix}type']),
       value:
           stringType.mapFromDatabaseResponse(data['${effectivePrefix}value']),
-      created_at: stringType
-          .mapFromDatabaseResponse(data['${effectivePrefix}created_at']),
-      updated_at: stringType
-          .mapFromDatabaseResponse(data['${effectivePrefix}updated_at']),
     );
   }
   @override
@@ -535,12 +525,6 @@ class BusinessSettingTable extends DataClass
     if (!nullToAbsent || value != null) {
       map['value'] = Variable<String>(value);
     }
-    if (!nullToAbsent || created_at != null) {
-      map['created_at'] = Variable<String>(created_at);
-    }
-    if (!nullToAbsent || updated_at != null) {
-      map['updated_at'] = Variable<String>(updated_at);
-    }
     return map;
   }
 
@@ -550,12 +534,6 @@ class BusinessSettingTable extends DataClass
       type: type == null && nullToAbsent ? const Value.absent() : Value(type),
       value:
           value == null && nullToAbsent ? const Value.absent() : Value(value),
-      created_at: created_at == null && nullToAbsent
-          ? const Value.absent()
-          : Value(created_at),
-      updated_at: updated_at == null && nullToAbsent
-          ? const Value.absent()
-          : Value(updated_at),
     );
   }
 
@@ -566,8 +544,6 @@ class BusinessSettingTable extends DataClass
       id: serializer.fromJson<int>(json['id']),
       type: serializer.fromJson<String>(json['type']),
       value: serializer.fromJson<String>(json['value']),
-      created_at: serializer.fromJson<String>(json['created_at']),
-      updated_at: serializer.fromJson<String>(json['updated_at']),
     );
   }
   @override
@@ -577,52 +553,35 @@ class BusinessSettingTable extends DataClass
       'id': serializer.toJson<int>(id),
       'type': serializer.toJson<String>(type),
       'value': serializer.toJson<String>(value),
-      'created_at': serializer.toJson<String>(created_at),
-      'updated_at': serializer.toJson<String>(updated_at),
     };
   }
 
-  BusinessSettingTable copyWith(
-          {int id,
-          String type,
-          String value,
-          String created_at,
-          String updated_at}) =>
+  BusinessSettingTable copyWith({int id, String type, String value}) =>
       BusinessSettingTable(
         id: id ?? this.id,
         type: type ?? this.type,
         value: value ?? this.value,
-        created_at: created_at ?? this.created_at,
-        updated_at: updated_at ?? this.updated_at,
       );
   @override
   String toString() {
     return (StringBuffer('BusinessSettingTable(')
           ..write('id: $id, ')
           ..write('type: $type, ')
-          ..write('value: $value, ')
-          ..write('created_at: $created_at, ')
-          ..write('updated_at: $updated_at')
+          ..write('value: $value')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => $mrjf($mrjc(
-      id.hashCode,
-      $mrjc(
-          type.hashCode,
-          $mrjc(value.hashCode,
-              $mrjc(created_at.hashCode, updated_at.hashCode)))));
+  int get hashCode =>
+      $mrjf($mrjc(id.hashCode, $mrjc(type.hashCode, value.hashCode)));
   @override
   bool operator ==(dynamic other) =>
       identical(this, other) ||
       (other is BusinessSettingTable &&
           other.id == this.id &&
           other.type == this.type &&
-          other.value == this.value &&
-          other.created_at == this.created_at &&
-          other.updated_at == this.updated_at);
+          other.value == this.value);
 }
 
 class BusinessSettingsTableCompanion
@@ -630,53 +589,35 @@ class BusinessSettingsTableCompanion
   final Value<int> id;
   final Value<String> type;
   final Value<String> value;
-  final Value<String> created_at;
-  final Value<String> updated_at;
   const BusinessSettingsTableCompanion({
     this.id = const Value.absent(),
     this.type = const Value.absent(),
     this.value = const Value.absent(),
-    this.created_at = const Value.absent(),
-    this.updated_at = const Value.absent(),
   });
   BusinessSettingsTableCompanion.insert({
     this.id = const Value.absent(),
     @required String type,
     @required String value,
-    @required String created_at,
-    @required String updated_at,
   })  : type = Value(type),
-        value = Value(value),
-        created_at = Value(created_at),
-        updated_at = Value(updated_at);
+        value = Value(value);
   static Insertable<BusinessSettingTable> custom({
     Expression<int> id,
     Expression<String> type,
     Expression<String> value,
-    Expression<String> created_at,
-    Expression<String> updated_at,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
       if (type != null) 'type': type,
       if (value != null) 'value': value,
-      if (created_at != null) 'created_at': created_at,
-      if (updated_at != null) 'updated_at': updated_at,
     });
   }
 
   BusinessSettingsTableCompanion copyWith(
-      {Value<int> id,
-      Value<String> type,
-      Value<String> value,
-      Value<String> created_at,
-      Value<String> updated_at}) {
+      {Value<int> id, Value<String> type, Value<String> value}) {
     return BusinessSettingsTableCompanion(
       id: id ?? this.id,
       type: type ?? this.type,
       value: value ?? this.value,
-      created_at: created_at ?? this.created_at,
-      updated_at: updated_at ?? this.updated_at,
     );
   }
 
@@ -692,12 +633,6 @@ class BusinessSettingsTableCompanion
     if (value.present) {
       map['value'] = Variable<String>(value.value);
     }
-    if (created_at.present) {
-      map['created_at'] = Variable<String>(created_at.value);
-    }
-    if (updated_at.present) {
-      map['updated_at'] = Variable<String>(updated_at.value);
-    }
     return map;
   }
 
@@ -706,9 +641,7 @@ class BusinessSettingsTableCompanion
     return (StringBuffer('BusinessSettingsTableCompanion(')
           ..write('id: $id, ')
           ..write('type: $type, ')
-          ..write('value: $value, ')
-          ..write('created_at: $created_at, ')
-          ..write('updated_at: $updated_at')
+          ..write('value: $value')
           ..write(')'))
         .toString();
   }
@@ -755,33 +688,8 @@ class $BusinessSettingsTableTable extends BusinessSettingsTable
     );
   }
 
-  final VerificationMeta _created_atMeta = const VerificationMeta('created_at');
-  GeneratedTextColumn _created_at;
   @override
-  GeneratedTextColumn get created_at => _created_at ??= _constructCreatedAt();
-  GeneratedTextColumn _constructCreatedAt() {
-    return GeneratedTextColumn(
-      'created_at',
-      $tableName,
-      false,
-    );
-  }
-
-  final VerificationMeta _updated_atMeta = const VerificationMeta('updated_at');
-  GeneratedTextColumn _updated_at;
-  @override
-  GeneratedTextColumn get updated_at => _updated_at ??= _constructUpdatedAt();
-  GeneratedTextColumn _constructUpdatedAt() {
-    return GeneratedTextColumn(
-      'updated_at',
-      $tableName,
-      false,
-    );
-  }
-
-  @override
-  List<GeneratedColumn> get $columns =>
-      [id, type, value, created_at, updated_at];
+  List<GeneratedColumn> get $columns => [id, type, value];
   @override
   $BusinessSettingsTableTable get asDslTable => this;
   @override
@@ -808,22 +716,6 @@ class $BusinessSettingsTableTable extends BusinessSettingsTable
           _valueMeta, value.isAcceptableOrUnknown(data['value'], _valueMeta));
     } else if (isInserting) {
       context.missing(_valueMeta);
-    }
-    if (data.containsKey('created_at')) {
-      context.handle(
-          _created_atMeta,
-          created_at.isAcceptableOrUnknown(
-              data['created_at'], _created_atMeta));
-    } else if (isInserting) {
-      context.missing(_created_atMeta);
-    }
-    if (data.containsKey('updated_at')) {
-      context.handle(
-          _updated_atMeta,
-          updated_at.isAcceptableOrUnknown(
-              data['updated_at'], _updated_atMeta));
-    } else if (isInserting) {
-      context.missing(_updated_atMeta);
     }
     return context;
   }

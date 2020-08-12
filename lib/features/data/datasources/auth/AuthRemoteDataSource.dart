@@ -24,7 +24,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     final response = await apiService.loginUser(email, password);
     if (response.statusCode == 200) {
       var result = AuthTokenModel.fromJson(response.body);
-
       return result;
     } else {
       throw ServerException();
