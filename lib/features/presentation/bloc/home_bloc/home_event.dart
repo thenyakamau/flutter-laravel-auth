@@ -8,3 +8,8 @@ class GetDashBoardDetailsEvent extends HomeEvent {
   @override
   List<Object> get props => [];
 }
+
+class GetDisplayColorsEvent extends HomeEvent {
+  @override
+  List<Object> get props => [];
+}

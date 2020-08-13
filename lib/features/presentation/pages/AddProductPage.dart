@@ -8,6 +8,7 @@ class AddProductPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey,
       appBar: AppBar(
         title: Text("Add Product"),
         leading: IconButton(
@@ -16,7 +17,6 @@ class AddProductPage extends StatelessWidget {
         ),
       ),
       body: Container(
-        padding: EdgeInsets.symmetric(vertical: 10.0),
         width: double.infinity,
         child: AddProductBody(),
       ),

@@ -3,7 +3,7 @@ import 'package:meta/meta.dart';
 
 import '../../../domain/entities/CustomColors.dart';
 
-part 'ColorsModel.g.dart';
+part 'CustomColorsModel.g.dart';
 
 @JsonSerializable()
 class CustomColorsModel extends CustomColors {

@@ -734,6 +734,243 @@ class $BusinessSettingsTableTable extends BusinessSettingsTable
   }
 }
 
+class CustomColorTable extends DataClass
+    implements Insertable<CustomColorTable> {
+  final int id;
+  final String name;
+  final String code;
+  CustomColorTable(
+      {@required this.id, @required this.name, @required this.code});
+  factory CustomColorTable.fromData(
+      Map<String, dynamic> data, GeneratedDatabase db,
+      {String prefix}) {
+    final effectivePrefix = prefix ?? '';
+    final intType = db.typeSystem.forDartType<int>();
+    final stringType = db.typeSystem.forDartType<String>();
+    return CustomColorTable(
+      id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      name: stringType.mapFromDatabaseResponse(data['${effectivePrefix}name']),
+      code: stringType.mapFromDatabaseResponse(data['${effectivePrefix}code']),
+    );
+  }
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (!nullToAbsent || id != null) {
+      map['id'] = Variable<int>(id);
+    }
+    if (!nullToAbsent || name != null) {
+      map['name'] = Variable<String>(name);
+    }
+    if (!nullToAbsent || code != null) {
+      map['code'] = Variable<String>(code);
+    }
+    return map;
+  }
+
+  CustomColorsTablesCompanion toCompanion(bool nullToAbsent) {
+    return CustomColorsTablesCompanion(
+      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
+      name: name == null && nullToAbsent ? const Value.absent() : Value(name),
+      code: code == null && nullToAbsent ? const Value.absent() : Value(code),
+    );
+  }
+
+  factory CustomColorTable.fromJson(Map<String, dynamic> json,
+      {ValueSerializer serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return CustomColorTable(
+      id: serializer.fromJson<int>(json['id']),
+      name: serializer.fromJson<String>(json['name']),
+      code: serializer.fromJson<String>(json['code']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'name': serializer.toJson<String>(name),
+      'code': serializer.toJson<String>(code),
+    };
+  }
+
+  CustomColorTable copyWith({int id, String name, String code}) =>
+      CustomColorTable(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        code: code ?? this.code,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('CustomColorTable(')
+          ..write('id: $id, ')
+          ..write('name: $name, ')
+          ..write('code: $code')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode =>
+      $mrjf($mrjc(id.hashCode, $mrjc(name.hashCode, code.hashCode)));
+  @override
+  bool operator ==(dynamic other) =>
+      identical(this, other) ||
+      (other is CustomColorTable &&
+          other.id == this.id &&
+          other.name == this.name &&
+          other.code == this.code);
+}
+
+class CustomColorsTablesCompanion extends UpdateCompanion<CustomColorTable> {
+  final Value<int> id;
+  final Value<String> name;
+  final Value<String> code;
+  const CustomColorsTablesCompanion({
+    this.id = const Value.absent(),
+    this.name = const Value.absent(),
+    this.code = const Value.absent(),
+  });
+  CustomColorsTablesCompanion.insert({
+    this.id = const Value.absent(),
+    @required String name,
+    @required String code,
+  })  : name = Value(name),
+        code = Value(code);
+  static Insertable<CustomColorTable> custom({
+    Expression<int> id,
+    Expression<String> name,
+    Expression<String> code,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (name != null) 'name': name,
+      if (code != null) 'code': code,
+    });
+  }
+
+  CustomColorsTablesCompanion copyWith(
+      {Value<int> id, Value<String> name, Value<String> code}) {
+    return CustomColorsTablesCompanion(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      code: code ?? this.code,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (code.present) {
+      map['code'] = Variable<String>(code.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('CustomColorsTablesCompanion(')
+          ..write('id: $id, ')
+          ..write('name: $name, ')
+          ..write('code: $code')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $CustomColorsTablesTable extends CustomColorsTables
+    with TableInfo<$CustomColorsTablesTable, CustomColorTable> {
+  final GeneratedDatabase _db;
+  final String _alias;
+  $CustomColorsTablesTable(this._db, [this._alias]);
+  final VerificationMeta _idMeta = const VerificationMeta('id');
+  GeneratedIntColumn _id;
+  @override
+  GeneratedIntColumn get id => _id ??= _constructId();
+  GeneratedIntColumn _constructId() {
+    return GeneratedIntColumn(
+      'id',
+      $tableName,
+      false,
+    );
+  }
+
+  final VerificationMeta _nameMeta = const VerificationMeta('name');
+  GeneratedTextColumn _name;
+  @override
+  GeneratedTextColumn get name => _name ??= _constructName();
+  GeneratedTextColumn _constructName() {
+    return GeneratedTextColumn(
+      'name',
+      $tableName,
+      false,
+    );
+  }
+
+  final VerificationMeta _codeMeta = const VerificationMeta('code');
+  GeneratedTextColumn _code;
+  @override
+  GeneratedTextColumn get code => _code ??= _constructCode();
+  GeneratedTextColumn _constructCode() {
+    return GeneratedTextColumn(
+      'code',
+      $tableName,
+      false,
+    );
+  }
+
+  @override
+  List<GeneratedColumn> get $columns => [id, name, code];
+  @override
+  $CustomColorsTablesTable get asDslTable => this;
+  @override
+  String get $tableName => _alias ?? 'custom_colors_tables';
+  @override
+  final String actualTableName = 'custom_colors_tables';
+  @override
+  VerificationContext validateIntegrity(Insertable<CustomColorTable> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id'], _idMeta));
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+          _nameMeta, name.isAcceptableOrUnknown(data['name'], _nameMeta));
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    if (data.containsKey('code')) {
+      context.handle(
+          _codeMeta, code.isAcceptableOrUnknown(data['code'], _codeMeta));
+    } else if (isInserting) {
+      context.missing(_codeMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  CustomColorTable map(Map<String, dynamic> data, {String tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
+    return CustomColorTable.fromData(data, _db, prefix: effectivePrefix);
+  }
+
+  @override
+  $CustomColorsTablesTable createAlias(String alias) {
+    return $CustomColorsTablesTable(_db, alias);
+  }
+}
+
 abstract class _$EcommerceDatabase extends GeneratedDatabase {
   _$EcommerceDatabase(QueryExecutor e)
       : super(SqlTypeSystem.defaultInstance, e);
@@ -743,15 +980,21 @@ abstract class _$EcommerceDatabase extends GeneratedDatabase {
   $BusinessSettingsTableTable _businessSettingsTable;
   $BusinessSettingsTableTable get businessSettingsTable =>
       _businessSettingsTable ??= $BusinessSettingsTableTable(this);
+  $CustomColorsTablesTable _customColorsTables;
+  $CustomColorsTablesTable get customColorsTables =>
+      _customColorsTables ??= $CustomColorsTablesTable(this);
   CategoriesDao _categoriesDao;
   CategoriesDao get categoriesDao =>
       _categoriesDao ??= CategoriesDao(this as EcommerceDatabase);
   BusinessSettingsDao _businessSettingsDao;
   BusinessSettingsDao get businessSettingsDao =>
       _businessSettingsDao ??= BusinessSettingsDao(this as EcommerceDatabase);
+  CustomColorsDao _customColorsDao;
+  CustomColorsDao get customColorsDao =>
+      _customColorsDao ??= CustomColorsDao(this as EcommerceDatabase);
   @override
   Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities =>
-      [categoriesTable, businessSettingsTable];
+      [categoriesTable, businessSettingsTable, customColorsTables];
 }
