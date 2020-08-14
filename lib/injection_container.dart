@@ -5,20 +5,28 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'core/network/NetworkInfo.dart';
 import 'core/utils/AuthentcationCheck.dart';
 import 'database/EcommerceDatabase.dart';
+import 'features/data/datasources/AddProducts/AddProductLocalDataSource.dart';
+import 'features/data/datasources/AddProducts/AddProductsRemoteDataSource.dart';
 import 'features/data/datasources/Home/HomeLocalDataSource.dart';
 import 'features/data/datasources/Home/HomeRemoteDataSource.dart';
 import 'features/data/datasources/api/AppApiService.dart';
 import 'features/data/datasources/auth/AuthLocalDataSource.dart';
 import 'features/data/datasources/auth/AuthRemoteDataSource.dart';
+import 'features/data/repositories/AddProductsRepositoryImpl.dart';
 import 'features/data/repositories/AuthRepositoryImpl.dart';
 import 'features/data/repositories/HomeRepositoryImpl.dart';
+import 'features/domain/repositories/AddProductsRepository.dart';
 import 'features/domain/repositories/AuthRepository.dart';
 import 'features/domain/repositories/HomeRepository.dart';
 import 'features/domain/usecases/DashBoardDetails.dart';
+import 'features/domain/usecases/GetCategories.dart';
+import 'features/domain/usecases/GetDisplayColors.dart';
+import 'features/domain/usecases/GetSubCategories.dart';
 import 'features/domain/usecases/LoginUser.dart';
 import 'features/domain/usecases/RefreshAuthentication.dart';
 import 'features/domain/usecases/RegisterUser.dart';
 import 'features/domain/usecases/SplashRefresh.dart';
+import 'features/presentation/bloc/add_products_bloc/addproduct_bloc.dart';
 import 'features/presentation/bloc/auth_bloc/auth_bloc.dart';
 import 'features/presentation/bloc/home_bloc/home_bloc.dart';
 
@@ -30,6 +38,8 @@ Future<void> init() async {
   _initializeHome();
   _initializeHomeRepository();
   _initializeDatabase();
+  _initializeAddProduct();
+  _initializeAddProductRepository();
 
   //!core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
@@ -106,6 +116,37 @@ void _initializeHome() {
   sl.registerLazySingleton(() => DashBoardDetails(homeRepository: sl()));
 }
 
+void _initializeAddProduct() {
+  sl.registerFactory(
+    () => AddproductBloc(
+      displayColors: sl(),
+      getCategories: sl(),
+      getSubCategories: sl(),
+    ),
+  );
+  sl.registerLazySingleton(() => GetDisplayColors(productsRepository: sl()));
+  sl.registerLazySingleton(() => GetCategories(productsRepository: sl()));
+  sl.registerLazySingleton(() => GetSubCategories(productsRepository: sl()));
+}
+
+void _initializeAddProductRepository() {
+  sl.registerLazySingleton<AddProductsRepository>(
+    () => AddProductsRepositoryImpl(
+      networkInfo: sl(),
+      authLocalDataSource: sl(),
+      productRemoteDataSource: sl(),
+      localDataSource: sl(),
+    ),
+  );
+  sl.registerLazySingleton<AddProductRemoteDataSource>(
+      () => AddProductRemoteDataSourceImpl(apiService: sl()));
+  sl.registerLazySingleton<AddProductLocalDataSource>(
+    () => AddProductLocalDataSourceImpl(colorsDao: sl(), categoriesDao: sl()),
+  );
+}
+
 void _initializeDatabase() {
   sl.registerLazySingleton(() => EcommerceDatabase().businessSettingsDao);
+  sl.registerLazySingleton(() => EcommerceDatabase().customColorsDao);
+  sl.registerLazySingleton(() => EcommerceDatabase().categoriesDao);
 }

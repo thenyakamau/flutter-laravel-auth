@@ -6,13 +6,13 @@ import '../../../core/usecases/UseCases.dart';
 import '../entities/CustomColors.dart';
 import '../repositories/AddProductsRepository.dart';
 
-class GetDisplayColors extends UseCase<CustomColors, NoParams> {
+class GetDisplayColors extends UseCase<List<CustomColors>, NoParams> {
   final AddProductsRepository productsRepository;
 
   GetDisplayColors({@required this.productsRepository});
 
   @override
-  Future<Either<Failure, CustomColors>> call(NoParams params) {
+  Future<Either<Failure, List<CustomColors>>> call(NoParams params) {
     return productsRepository.getCustomColors();
   }
 }

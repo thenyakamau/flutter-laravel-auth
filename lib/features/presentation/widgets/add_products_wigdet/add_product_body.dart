@@ -15,7 +15,8 @@ class AddProductBody extends StatefulWidget {
   _AddProductBodyState createState() => _AddProductBodyState();
 }
 
-class _AddProductBodyState extends State<AddProductBody> {
+class _AddProductBodyState extends State<AddProductBody>
+    with AutomaticKeepAliveClientMixin {
   List<String> productTags = [];
   List<CustomColors> colorsList = [];
   bool colorsOption = false;
@@ -56,21 +57,25 @@ class _AddProductBodyState extends State<AddProductBody> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
+                  child: GestureDetector(
+                    // onTap: () => ,
+                    child: TextField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        labelText: "Product Category",
+                        labelStyle: kLabelStyle,
+                        // errorText: widget.state.title == "email"
+                        //     ? widget.state.message
+                        //     : null,
+                        hintText: "Enter product category",
+                        hintStyle: kHintTextStyle,
+                        prefixIcon: Icon(Icons.account_box),
                       ),
-                      labelText: "Product Category",
-                      labelStyle: kLabelStyle,
-                      // errorText: widget.state.title == "email"
-                      //     ? widget.state.message
-                      //     : null,
-                      hintText: "Enter product category",
-                      hintStyle: kHintTextStyle,
-                      prefixIcon: Icon(Icons.account_box),
+                      enabled: false,
+                      onChanged: (value) {},
                     ),
-                    onChanged: (value) {},
                   ),
                 ),
                 Row(
@@ -468,4 +473,7 @@ class _AddProductBodyState extends State<AddProductBody> {
   void dispose() {
     super.dispose();
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

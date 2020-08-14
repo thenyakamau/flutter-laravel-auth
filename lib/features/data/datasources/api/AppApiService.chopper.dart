@@ -59,4 +59,42 @@ class _$AppApiService extends AppApiService {
     final $request = Request('GET', $url, client.baseUrl, headers: $headers);
     return client.send<dynamic, dynamic>($request);
   }
+
+  @override
+  Future<Response<dynamic>> getDisplayColors() {
+    final $url = '/api/getCustomColors';
+    final $request = Request('GET', $url, client.baseUrl);
+    return client.send<dynamic, dynamic>($request);
+  }
+
+  @override
+  Future<Response<dynamic>> getProductCategories() {
+    final $url = '/api/getProductCategories';
+    final $request = Request('GET', $url, client.baseUrl);
+    return client.send<dynamic, dynamic>($request);
+  }
+
+  @override
+  Future<Response<dynamic>> getProductSubCategories(int id) {
+    final $url = '/api/getSubCategories';
+    final $body = <String, dynamic>{'id': id};
+    final $request = Request('GET', $url, client.baseUrl, body: $body);
+    return client.send<dynamic, dynamic>($request);
+  }
+
+  @override
+  Future<Response<dynamic>> getProductSubSubCategories(int id) {
+    final $url = '/api/getSubSubCategories';
+    final $body = <String, dynamic>{'id': id};
+    final $request = Request('GET', $url, client.baseUrl, body: $body);
+    return client.send<dynamic, dynamic>($request);
+  }
+
+  @override
+  Future<Response<dynamic>> getProductBrands(String brandIds) {
+    final $url = '/api/getProductBrand';
+    final $body = <String, dynamic>{'brand_id': brandIds};
+    final $request = Request('GET', $url, client.baseUrl, body: $body);
+    return client.send<dynamic, dynamic>($request);
+  }
 }
