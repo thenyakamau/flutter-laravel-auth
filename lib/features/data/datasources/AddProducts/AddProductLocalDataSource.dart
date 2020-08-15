@@ -59,7 +59,6 @@ class AddProductLocalDataSourceImpl implements AddProductLocalDataSource {
         return await categoriesDao.insertCategory(CategoryTable(
           id: e.id,
           name: e.name,
-          banner: e.banner,
           icon: e.icon,
           feature: e.feature,
           top: e.top,
@@ -79,7 +78,6 @@ class AddProductLocalDataSourceImpl implements AddProductLocalDataSource {
       categories.add(CategoriesModel(
         id: e.id,
         name: e.name,
-        banner: e.banner,
         icon: e.icon,
         feature: e.feature,
         top: e.top,

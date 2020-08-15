@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/utils/Constants.dart';
 import '../../../domain/entities/CustomColors.dart';
+import '../../bloc/add_products_bloc/addproduct_bloc.dart';
 import 'add_product_color_view.dart';
 import 'add_product_heading.dart';
 import 'add_product_tag_view.dart';
@@ -9,7 +10,10 @@ import 'add_product_tag_view.dart';
 class AddProductBody extends StatefulWidget {
   const AddProductBody({
     Key key,
+    @required this.productBloc,
   }) : super(key: key);
+
+  final AddproductBloc productBloc;
 
   @override
   _AddProductBodyState createState() => _AddProductBodyState();
@@ -57,25 +61,27 @@ class _AddProductBodyState extends State<AddProductBody>
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: GestureDetector(
-                    // onTap: () => ,
-                    child: TextField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        labelText: "Product Category",
-                        labelStyle: kLabelStyle,
-                        // errorText: widget.state.title == "email"
-                        //     ? widget.state.message
-                        //     : null,
-                        hintText: "Enter product category",
-                        hintStyle: kHintTextStyle,
-                        prefixIcon: Icon(Icons.account_box),
+                  child: TextField(
+                    enableInteractiveSelection: false,
+                    onTap: () {
+                      FocusScope.of(context).requestFocus(new FocusNode());
+                      widget.productBloc.add(GetDisplayCategoriesEvent());
+                    },
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
                       ),
-                      enabled: false,
-                      onChanged: (value) {},
+                      labelText: "Product Category",
+                      labelStyle: kLabelStyle,
+                      // errorText: widget.state.title == "email"
+                      //     ? widget.state.message
+                      //     : null,
+                      hintText: "Enter product category",
+                      hintStyle: kHintTextStyle,
+                      prefixIcon: Icon(Icons.account_box),
                     ),
+                    // enabled: false,
+                    onChanged: (value) {},
                   ),
                 ),
                 Row(
@@ -131,16 +137,17 @@ class _AddProductBodyState extends State<AddProductBody>
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      labelText: "Product Sub Sub Category",
+                      labelText: "Product brand",
                       labelStyle: kLabelStyle,
                       // errorText: widget.state.title == "email"
                       //     ? widget.state.message
                       //     : null,
-                      hintText: "Enter product sub sub category",
+                      hintText: "Enter product brand",
                       hintStyle: kHintTextStyle,
                       prefixIcon: Icon(Icons.account_box),
                     ),
                     onChanged: (value) {},
+                    enabled: false,
                   ),
                 ),
                 Padding(

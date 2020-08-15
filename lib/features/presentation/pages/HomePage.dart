@@ -30,7 +30,20 @@ class _HomePageState extends State<HomePage> {
       body: SingleChildScrollView(
         child: BlocProvider<HomeBloc>(
           create: (context) => homeBloc,
-          child: Container(),
+          child: BlocBuilder<HomeBloc, HomeState>(
+            builder: (context, state) {
+              if (state is HomeInitial) {
+                return Container();
+              } else if (state is HomeUnAuthenticatedState) {
+                WidgetsBinding.instance.addPostFrameCallback(
+                  (_) => Navigator.of(context).pushReplacementNamed('/login'),
+                );
+                return Container(color: Colors.white);
+              } else {
+                return Container(color: Colors.white);
+              }
+            },
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(

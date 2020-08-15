@@ -10,14 +10,12 @@ part of 'EcommerceDatabase.dart';
 class CategoryTable extends DataClass implements Insertable<CategoryTable> {
   final int id;
   final String name;
-  final String banner;
   final String icon;
   final String feature;
   final String top;
   CategoryTable(
       {@required this.id,
       @required this.name,
-      this.banner,
       this.icon,
       this.feature,
       this.top});
@@ -30,8 +28,6 @@ class CategoryTable extends DataClass implements Insertable<CategoryTable> {
     return CategoryTable(
       id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
       name: stringType.mapFromDatabaseResponse(data['${effectivePrefix}name']),
-      banner:
-          stringType.mapFromDatabaseResponse(data['${effectivePrefix}banner']),
       icon: stringType.mapFromDatabaseResponse(data['${effectivePrefix}icon']),
       feature:
           stringType.mapFromDatabaseResponse(data['${effectivePrefix}feature']),
@@ -46,9 +42,6 @@ class CategoryTable extends DataClass implements Insertable<CategoryTable> {
     }
     if (!nullToAbsent || name != null) {
       map['name'] = Variable<String>(name);
-    }
-    if (!nullToAbsent || banner != null) {
-      map['banner'] = Variable<String>(banner);
     }
     if (!nullToAbsent || icon != null) {
       map['icon'] = Variable<String>(icon);
@@ -66,8 +59,6 @@ class CategoryTable extends DataClass implements Insertable<CategoryTable> {
     return CategoriesTableCompanion(
       id: id == null && nullToAbsent ? const Value.absent() : Value(id),
       name: name == null && nullToAbsent ? const Value.absent() : Value(name),
-      banner:
-          banner == null && nullToAbsent ? const Value.absent() : Value(banner),
       icon: icon == null && nullToAbsent ? const Value.absent() : Value(icon),
       feature: feature == null && nullToAbsent
           ? const Value.absent()
@@ -82,7 +73,6 @@ class CategoryTable extends DataClass implements Insertable<CategoryTable> {
     return CategoryTable(
       id: serializer.fromJson<int>(json['id']),
       name: serializer.fromJson<String>(json['name']),
-      banner: serializer.fromJson<String>(json['banner']),
       icon: serializer.fromJson<String>(json['icon']),
       feature: serializer.fromJson<String>(json['feature']),
       top: serializer.fromJson<String>(json['top']),
@@ -94,7 +84,6 @@ class CategoryTable extends DataClass implements Insertable<CategoryTable> {
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
       'name': serializer.toJson<String>(name),
-      'banner': serializer.toJson<String>(banner),
       'icon': serializer.toJson<String>(icon),
       'feature': serializer.toJson<String>(feature),
       'top': serializer.toJson<String>(top),
@@ -102,16 +91,10 @@ class CategoryTable extends DataClass implements Insertable<CategoryTable> {
   }
 
   CategoryTable copyWith(
-          {int id,
-          String name,
-          String banner,
-          String icon,
-          String feature,
-          String top}) =>
+          {int id, String name, String icon, String feature, String top}) =>
       CategoryTable(
         id: id ?? this.id,
         name: name ?? this.name,
-        banner: banner ?? this.banner,
         icon: icon ?? this.icon,
         feature: feature ?? this.feature,
         top: top ?? this.top,
@@ -121,7 +104,6 @@ class CategoryTable extends DataClass implements Insertable<CategoryTable> {
     return (StringBuffer('CategoryTable(')
           ..write('id: $id, ')
           ..write('name: $name, ')
-          ..write('banner: $banner, ')
           ..write('icon: $icon, ')
           ..write('feature: $feature, ')
           ..write('top: $top')
@@ -132,17 +114,14 @@ class CategoryTable extends DataClass implements Insertable<CategoryTable> {
   @override
   int get hashCode => $mrjf($mrjc(
       id.hashCode,
-      $mrjc(
-          name.hashCode,
-          $mrjc(banner.hashCode,
-              $mrjc(icon.hashCode, $mrjc(feature.hashCode, top.hashCode))))));
+      $mrjc(name.hashCode,
+          $mrjc(icon.hashCode, $mrjc(feature.hashCode, top.hashCode)))));
   @override
   bool operator ==(dynamic other) =>
       identical(this, other) ||
       (other is CategoryTable &&
           other.id == this.id &&
           other.name == this.name &&
-          other.banner == this.banner &&
           other.icon == this.icon &&
           other.feature == this.feature &&
           other.top == this.top);
@@ -151,14 +130,12 @@ class CategoryTable extends DataClass implements Insertable<CategoryTable> {
 class CategoriesTableCompanion extends UpdateCompanion<CategoryTable> {
   final Value<int> id;
   final Value<String> name;
-  final Value<String> banner;
   final Value<String> icon;
   final Value<String> feature;
   final Value<String> top;
   const CategoriesTableCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
-    this.banner = const Value.absent(),
     this.icon = const Value.absent(),
     this.feature = const Value.absent(),
     this.top = const Value.absent(),
@@ -166,7 +143,6 @@ class CategoriesTableCompanion extends UpdateCompanion<CategoryTable> {
   CategoriesTableCompanion.insert({
     this.id = const Value.absent(),
     @required String name,
-    this.banner = const Value.absent(),
     this.icon = const Value.absent(),
     this.feature = const Value.absent(),
     this.top = const Value.absent(),
@@ -174,7 +150,6 @@ class CategoriesTableCompanion extends UpdateCompanion<CategoryTable> {
   static Insertable<CategoryTable> custom({
     Expression<int> id,
     Expression<String> name,
-    Expression<String> banner,
     Expression<String> icon,
     Expression<String> feature,
     Expression<String> top,
@@ -182,7 +157,6 @@ class CategoriesTableCompanion extends UpdateCompanion<CategoryTable> {
     return RawValuesInsertable({
       if (id != null) 'id': id,
       if (name != null) 'name': name,
-      if (banner != null) 'banner': banner,
       if (icon != null) 'icon': icon,
       if (feature != null) 'feature': feature,
       if (top != null) 'top': top,
@@ -192,14 +166,12 @@ class CategoriesTableCompanion extends UpdateCompanion<CategoryTable> {
   CategoriesTableCompanion copyWith(
       {Value<int> id,
       Value<String> name,
-      Value<String> banner,
       Value<String> icon,
       Value<String> feature,
       Value<String> top}) {
     return CategoriesTableCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
-      banner: banner ?? this.banner,
       icon: icon ?? this.icon,
       feature: feature ?? this.feature,
       top: top ?? this.top,
@@ -214,9 +186,6 @@ class CategoriesTableCompanion extends UpdateCompanion<CategoryTable> {
     }
     if (name.present) {
       map['name'] = Variable<String>(name.value);
-    }
-    if (banner.present) {
-      map['banner'] = Variable<String>(banner.value);
     }
     if (icon.present) {
       map['icon'] = Variable<String>(icon.value);
@@ -235,7 +204,6 @@ class CategoriesTableCompanion extends UpdateCompanion<CategoryTable> {
     return (StringBuffer('CategoriesTableCompanion(')
           ..write('id: $id, ')
           ..write('name: $name, ')
-          ..write('banner: $banner, ')
           ..write('icon: $icon, ')
           ..write('feature: $feature, ')
           ..write('top: $top')
@@ -270,18 +238,6 @@ class $CategoriesTableTable extends CategoriesTable
       'name',
       $tableName,
       false,
-    );
-  }
-
-  final VerificationMeta _bannerMeta = const VerificationMeta('banner');
-  GeneratedTextColumn _banner;
-  @override
-  GeneratedTextColumn get banner => _banner ??= _constructBanner();
-  GeneratedTextColumn _constructBanner() {
-    return GeneratedTextColumn(
-      'banner',
-      $tableName,
-      true,
     );
   }
 
@@ -322,7 +278,7 @@ class $CategoriesTableTable extends CategoriesTable
   }
 
   @override
-  List<GeneratedColumn> get $columns => [id, name, banner, icon, feature, top];
+  List<GeneratedColumn> get $columns => [id, name, icon, feature, top];
   @override
   $CategoriesTableTable get asDslTable => this;
   @override
@@ -342,10 +298,6 @@ class $CategoriesTableTable extends CategoriesTable
           _nameMeta, name.isAcceptableOrUnknown(data['name'], _nameMeta));
     } else if (isInserting) {
       context.missing(_nameMeta);
-    }
-    if (data.containsKey('banner')) {
-      context.handle(_bannerMeta,
-          banner.isAcceptableOrUnknown(data['banner'], _bannerMeta));
     }
     if (data.containsKey('icon')) {
       context.handle(

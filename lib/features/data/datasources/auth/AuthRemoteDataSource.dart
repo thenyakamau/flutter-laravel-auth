@@ -49,6 +49,8 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     if (response.statusCode == 200) {
       var result = AuthTokenModel.fromJson(response.body);
       return result;
+    } else if (response.statusCode == 401) {
+      throw UnAuthenticatedException();
     } else {
       throw ServerException();
     }
@@ -61,6 +63,8 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     if (response.statusCode == 200) {
       print(response.body['businessSettings']);
       return response;
+    } else if (response.statusCode == 401) {
+      throw UnAuthenticatedException();
     } else {
       throw ServerException();
     }

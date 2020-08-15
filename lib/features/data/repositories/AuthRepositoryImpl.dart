@@ -28,23 +28,26 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Either<Failure, ApiSuccess>> loginUser(
       String email, String password) async {
-    // if (await networkInfo.isConnected) {
-    try {
-      final authTokenModel = await remoteDataSource.loginUser(email, password);
-      localDataSource.cacheAuthToken(authTokenModel);
-      ApiSuccessModel apiSuccessModel =
-          new ApiSuccessModel(success: true, message: "Login success");
-      return Right(apiSuccessModel);
-    } on ServerException {
-      print("server exception");
+    if (await networkInfo.isConnected) {
+      try {
+        final authTokenModel =
+            await remoteDataSource.loginUser(email, password);
+        localDataSource.cacheAuthToken(authTokenModel);
+        ApiSuccessModel apiSuccessModel =
+            new ApiSuccessModel(success: true, message: "Login success");
+        return Right(apiSuccessModel);
+      } on ServerException {
+        print("server exception");
+        return Left(ServerFailure());
+      } on UnAuthenticatedException {
+        return Left(UnAuthenticatedFailure());
+      } on CacheException {
+        return Left(CacheFailure());
+      }
+    } else {
+      print("internet exception");
       return Left(ServerFailure());
-    } on CacheException {
-      return Left(CacheFailure());
     }
-    // } else {
-    //   print("internet exception");
-    //   return Left(ServerFailure());
-    // }
   }
 
   @override
@@ -80,6 +83,8 @@ class AuthRepositoryImpl implements AuthRepository {
           ApiSuccessModel apiSuccessModel =
               new ApiSuccessModel(success: true, message: "Refresh success");
           return Right(apiSuccessModel);
+        } on UnAuthenticatedException {
+          return Left(UnAuthenticatedFailure());
         } on ServerException {
           return Left(ServerFailure());
         } on CacheException {
@@ -109,6 +114,8 @@ class AuthRepositoryImpl implements AuthRepository {
           localDataSource.cacheBusinessSettings(settings);
           return Right(
               new ApiSuccessModel(success: true, message: "Refresh success"));
+        } on UnAuthenticatedException {
+          return Left(UnAuthenticatedFailure());
         } on ServerException {
           return Left(ServerFailure());
         } on CacheException {

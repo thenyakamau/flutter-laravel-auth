@@ -21,8 +21,9 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         .getDashBoardData('Bearer ${authTokenModel.access_token}');
     if (response.statusCode == 200) {
       var result = DashBoardModel.fromJson(response.body);
-      print(result);
       return result;
+    } else if (response.statusCode == 401) {
+      throw UnAuthenticatedException();
     } else {
       throw ServerException();
     }

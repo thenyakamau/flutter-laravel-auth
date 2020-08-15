@@ -32,6 +32,8 @@ class HomeRepositoryImpl implements HomeRepository {
               await homeRemoteDataSource.getDashBoardDetails(token);
           localDataSource.cacheDashBoard(dashboard);
           return Right(dashboard);
+        } on UnAuthenticatedException {
+          return Left(UnAuthenticatedFailure());
         } on ServerException {
           return Left(ServerFailure());
         }

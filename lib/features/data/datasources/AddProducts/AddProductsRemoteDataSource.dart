@@ -22,9 +22,14 @@ class AddProductRemoteDataSourceImpl implements AddProductRemoteDataSource {
     final response = await apiService.getDisplayColors();
 
     if (response.statusCode == 200) {
-      List<CustomColorsModel> customColors = (response.body as List)
-          .map((e) => CustomColorsModel.fromJson(e))
-          .toList();
+      List<CustomColorsModel> customColors = [];
+      try {
+        customColors = (response.body as List)
+            .map((e) => CustomColorsModel.fromJson(e))
+            .toList();
+      } catch (e) {
+        print(e.toString());
+      }
       return customColors;
     } else {
       throw ServerException();
@@ -35,9 +40,14 @@ class AddProductRemoteDataSourceImpl implements AddProductRemoteDataSource {
   Future<List<CategoriesModel>> getCategories() async {
     final response = await apiService.getProductCategories();
     if (response.statusCode == 200) {
-      List<CategoriesModel> categories = (response.body as List)
-          .map((e) => CategoriesModel.fromJson(e))
-          .toList();
+      List<CategoriesModel> categories = [];
+      try {
+        categories = (response.body['categories'] as List)
+            .map((e) => CategoriesModel.fromJson(e))
+            .toList();
+      } catch (e) {
+        print(e.toString());
+      }
       return categories;
     } else {
       throw ServerException();
@@ -48,9 +58,14 @@ class AddProductRemoteDataSourceImpl implements AddProductRemoteDataSource {
   Future<List<SubCategoriesModel>> getSubCategories(int id) async {
     final response = await apiService.getProductSubCategories(id);
     if (response.statusCode == 200) {
-      List<SubCategoriesModel> subCategories = (response.body as List)
-          .map((e) => SubCategoriesModel.fromJson(e))
-          .toList();
+      List<SubCategoriesModel> subCategories = [];
+      try {
+        subCategories = (response.body as List)
+            .map((e) => SubCategoriesModel.fromJson(e))
+            .toList();
+      } catch (e) {
+        print(e.toString());
+      }
       return subCategories;
     } else {
       throw ServerException();

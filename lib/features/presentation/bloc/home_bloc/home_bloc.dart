@@ -25,7 +25,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       yield HomeLoadingState();
       final dashBoardEither = await dashBoardDetails(NoParams());
       yield* dashBoardEither.fold((failure) async* {
-        yield HomeErrorState(message: _mapFailureToMessage(failure));
+        if (failure is UnAuthenticatedFailure) {
+          yield HomeUnAuthenticatedState();
+        } else {
+          yield HomeErrorState(message: _mapFailureToMessage(failure));
+        }
       }, (dashBoard) async* {
         yield HomeLoadedState(dashBoard: dashBoard);
       });

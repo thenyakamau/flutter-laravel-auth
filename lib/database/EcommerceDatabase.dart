@@ -1,11 +1,11 @@
-import 'package:flutter_laravel_auth/database/BusinessSettingsData/BusinessSettingsDao.dart';
-import 'package:flutter_laravel_auth/database/CustomColorsData/CustomColorsDao.dart';
-import 'package:flutter_laravel_auth/database/CustomColorsData/CustomColorsTable.dart';
 import 'package:moor_flutter/moor_flutter.dart';
 
+import 'BusinessSettingsData/BusinessSettingsDao.dart';
 import 'BusinessSettingsData/BusinessSettingsTable.dart';
 import 'CategoryData/CategoriesDao.dart';
 import 'CategoryData/CategoriesTable.dart';
+import 'CustomColorsData/CustomColorsDao.dart';
+import 'CustomColorsData/CustomColorsTable.dart';
 
 part 'EcommerceDatabase.g.dart';
 

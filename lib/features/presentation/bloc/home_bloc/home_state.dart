@@ -29,3 +29,8 @@ class HomeErrorState extends HomeState {
   @override
   List<Object> get props => [message];
 }
+
+class HomeUnAuthenticatedState extends HomeState {
+  @override
+  List<Object> get props => [];
+}

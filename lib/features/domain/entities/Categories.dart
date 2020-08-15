@@ -4,7 +4,6 @@ import 'package:meta/meta.dart';
 class Categories extends Equatable {
   final int id;
   final String name;
-  final String banner;
   final String icon;
   final String feature;
   final String top;
@@ -12,12 +11,11 @@ class Categories extends Equatable {
   Categories({
     @required this.id,
     @required this.name,
-    @required this.banner,
     @required this.icon,
     @required this.feature,
     @required this.top,
   });
 
   @override
-  List<Object> get props => [id, name, banner, icon, feature, top];
+  List<Object> get props => [id, name, icon, feature, top];
 }

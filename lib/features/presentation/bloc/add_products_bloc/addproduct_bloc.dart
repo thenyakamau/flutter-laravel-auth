@@ -33,6 +33,7 @@ class AddproductBloc extends Bloc<AddproductEvent, AddproductState> {
     AddproductEvent event,
   ) async* {
     if (event is GetDisplayColorsEvent) {
+      yield AddProductLoadingState();
       final colorsEither = await displayColors(NoParams());
       yield* colorsEither.fold((failure) async* {
         yield AddProductsErrorState(message: _mapFailureToMessage(failure));
@@ -40,6 +41,7 @@ class AddproductBloc extends Bloc<AddproductEvent, AddproductState> {
         yield AddProductChooseColorState(customColors: colors);
       });
     } else if (event is GetDisplayCategoriesEvent) {
+      yield AddProductLoadingState();
       final categoriesEither = await getCategories(NoParams());
       yield* categoriesEither.fold((failure) async* {
         yield AddProductsErrorState(message: _mapFailureToMessage(failure));
@@ -47,8 +49,9 @@ class AddproductBloc extends Bloc<AddproductEvent, AddproductState> {
         yield AddProductChooseCategoryState(categories: categories);
       });
     } else if (event is GetDisplaySubCategoriesEvent) {
+      yield AddProductLoadingState();
       final subCategoriesEither =
-          await getSubCategories(ParamsId(id: event.id));
+          await getSubCategories(ParamsId(id: event.category.id));
       yield* subCategoriesEither.fold((failure) async* {
         yield AddProductsErrorState(message: _mapFailureToMessage(failure));
       }, (subCategories) async* {
