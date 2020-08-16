@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
 import '../../../core/errors/Failures.dart';
@@ -9,6 +10,7 @@ import '../../data/models/User/UserModel.dart';
 import '../entities/ApiSuccess.dart';
 import '../repositories/AuthRepository.dart';
 
+@lazySingleton
 class RegisterUser extends UseCase<ApiSuccess, RegisterParams> {
   final AuthRepository authRepository;
 

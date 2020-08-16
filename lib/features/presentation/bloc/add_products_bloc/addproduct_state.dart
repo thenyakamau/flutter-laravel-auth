@@ -45,3 +45,21 @@ class AddProductChooseSubCategoryState extends AddproductState {
   @override
   List<Object> get props => [subCategories];
 }
+
+class AddProductChooseSubSubCategoryState extends AddproductState {
+  final List<SubSubCategories> subSubCategories;
+
+  AddProductChooseSubSubCategoryState({@required this.subSubCategories});
+
+  @override
+  List<Object> get props => [subSubCategories];
+}
+
+class AddProductChooseBrandState extends AddproductState {
+  final List<Brands> brands;
+
+  AddProductChooseBrandState({@required this.brands});
+
+  @override
+  List<Object> get props => [brands];
+}

@@ -2,14 +2,17 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../core/errors/Failures.dart';
 import '../../../../core/usecases/UseCases.dart';
 import '../../../../core/utils/Constants.dart';
+import '../../../domain/entities/Brands.dart';
 import '../../../domain/entities/Categories.dart';
 import '../../../domain/entities/CustomColors.dart';
 import '../../../domain/entities/SubCategories.dart';
+import '../../../domain/entities/SubSubCategories.dart';
 import '../../../domain/usecases/GetCategories.dart';
 import '../../../domain/usecases/GetDisplayColors.dart';
 import '../../../domain/usecases/GetSubCategories.dart';
@@ -17,6 +20,7 @@ import '../../../domain/usecases/GetSubCategories.dart';
 part 'addproduct_event.dart';
 part 'addproduct_state.dart';
 
+@injectable
 class AddproductBloc extends Bloc<AddproductEvent, AddproductState> {
   final GetDisplayColors displayColors;
   final GetCategories getCategories;
@@ -57,6 +61,8 @@ class AddproductBloc extends Bloc<AddproductEvent, AddproductState> {
       }, (subCategories) async* {
         yield AddProductChooseSubCategoryState(subCategories: subCategories);
       });
+    } else if (event is GetDisplaySubSubCategoriesEvent) {
+      yield AddProductLoadingState();
     }
   }
 

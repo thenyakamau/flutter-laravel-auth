@@ -29,3 +29,11 @@ class GetDisplaySubSubCategoriesEvent extends AddproductEvent {
   @override
   List<Object> get props => [subCategories];
 }
+
+class GetDisplayBrandsEvent extends AddproductEvent {
+  final SubSubCategories subCategories;
+
+  GetDisplayBrandsEvent({@required this.subCategories});
+  @override
+  List<Object> get props => [subCategories];
+}

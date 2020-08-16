@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../core/errors/Exceptions.dart';
@@ -10,6 +11,7 @@ abstract class HomeRemoteDataSource {
   Future<DashBoard> getDashBoardDetails(AuthTokenModel authTokenModel);
 }
 
+@LazySingleton(as: HomeRemoteDataSource)
 class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   final AppApiService apiService;
 

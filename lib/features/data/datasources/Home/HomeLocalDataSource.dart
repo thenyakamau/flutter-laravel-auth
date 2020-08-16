@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -12,6 +13,7 @@ abstract class HomeLocalDataSource {
   Future<DashBoardModel> getDashBoardCache();
 }
 
+@LazySingleton(as: HomeLocalDataSource)
 class HomeLocalDataSourceImpl implements HomeLocalDataSource {
   final SharedPreferences sharedPreferences;
 

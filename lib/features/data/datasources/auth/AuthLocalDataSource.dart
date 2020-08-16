@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -17,6 +18,7 @@ abstract class AuthLocalDataSource {
       List<BusinessSettingsModel> businessSettings);
 }
 
+@LazySingleton(as: AuthLocalDataSource)
 class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   final SharedPreferences sharedPreferences;
   final BusinessSettingsDao businessSettingsDao;

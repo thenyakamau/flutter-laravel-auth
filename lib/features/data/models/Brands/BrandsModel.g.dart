@@ -1,22 +1,24 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'SubCategoriesModel.dart';
+part of 'BrandsModel.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-SubCategoriesModel _$SubCategoriesModelFromJson(Map<String, dynamic> json) {
-  return SubCategoriesModel(
+BrandsModel _$BrandsModelFromJson(Map<String, dynamic> json) {
+  return BrandsModel(
     id: json['id'] as int,
     name: json['name'] as String,
-    category_id: json['category_id'] as int,
+    logo: json['logo'] as String,
+    top: json['top'] as int,
   );
 }
 
-Map<String, dynamic> _$SubCategoriesModelToJson(SubCategoriesModel instance) =>
+Map<String, dynamic> _$BrandsModelToJson(BrandsModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'category_id': instance.category_id,
+      'logo': instance.logo,
+      'top': instance.top,
     };

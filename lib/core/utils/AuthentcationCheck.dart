@@ -1,8 +1,10 @@
 import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../features/data/models/Shop/ShopModel.dart';
 import '../../features/data/models/User/UserModel.dart';
 
+@lazySingleton
 class CheckAuthentication {
   Either<List, UserModel> checkRegAuthentication(String name, String email,
       String number, String password, String cPassword) {
@@ -22,7 +24,7 @@ class CheckAuthentication {
     } else {
       var user = UserModel(
         name: name,
-        email: email,
+        email: email.toLowerCase(),
         number: number,
         password: password,
       );

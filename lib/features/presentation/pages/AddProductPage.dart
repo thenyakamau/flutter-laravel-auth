@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_laravel_auth/features/presentation/widgets/loading_widget.dart';
 
-import '../../../injection_container.dart';
+import '../../../injection.dart';
 import '../bloc/add_products_bloc/addproduct_bloc.dart';
 import '../widgets/add_products_wigdet/add_product_wigets.dart';
+import '../widgets/loading_widget.dart';
 
 class AddProductPage extends StatefulWidget {
   const AddProductPage({Key key}) : super(key: key);
@@ -18,7 +18,7 @@ class _AddProductPageState extends State<AddProductPage> {
   @override
   void initState() {
     super.initState();
-    productBloc = sl<AddproductBloc>();
+    productBloc = getIt<AddproductBloc>();
   }
 
   @override

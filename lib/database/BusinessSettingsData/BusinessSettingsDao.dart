@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'package:moor_flutter/moor_flutter.dart';
 
 import '../EcommerceDatabase.dart';
@@ -6,6 +7,7 @@ import 'BusinessSettingsTable.dart';
 part 'BusinessSettingsDao.g.dart';
 
 @UseDao(tables: [BusinessSettingsTable])
+@lazySingleton
 class BusinessSettingsDao extends DatabaseAccessor<EcommerceDatabase>
     with _$BusinessSettingsDaoMixin {
   BusinessSettingsDao(EcommerceDatabase db) : super(db);

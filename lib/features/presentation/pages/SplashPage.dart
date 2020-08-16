@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_laravel_auth/injection.dart';
 
-import '../../../injection_container.dart';
 import '../bloc/auth_bloc/auth_bloc.dart';
 import '../widgets/splash_widgets/splash_widget.dart';
 
@@ -17,7 +17,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    authBloc = sl<AuthBloc>();
+    authBloc = getIt<AuthBloc>();
     authBloc.add(SplashRefreshEvent());
   }
 

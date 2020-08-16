@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../database/CategoryData/CategoriesDao.dart';
@@ -13,6 +14,7 @@ abstract class AddProductLocalDataSource {
   Future<void> cacheCategories(List<CategoriesModel> categories);
 }
 
+@LazySingleton(as: AddProductLocalDataSource)
 class AddProductLocalDataSourceImpl implements AddProductLocalDataSource {
   final CustomColorsDao colorsDao;
   final CategoriesDao categoriesDao;
@@ -28,7 +30,7 @@ class AddProductLocalDataSourceImpl implements AddProductLocalDataSource {
     for (var i = 0; i < customColors.length; i++) {
       try {
         CustomColorsModel e = customColors[i];
-        return await colorsDao.insertColor(CustomColorTable(
+        await colorsDao.insertColor(CustomColorTable(
           id: e.id,
           name: e.name,
           code: e.name,
@@ -56,7 +58,7 @@ class AddProductLocalDataSourceImpl implements AddProductLocalDataSource {
     for (var i = 0; i < categories.length; i++) {
       try {
         CategoriesModel e = categories[i];
-        return await categoriesDao.insertCategory(CategoryTable(
+        await categoriesDao.insertCategory(CategoryTable(
           id: e.id,
           name: e.name,
           icon: e.icon,

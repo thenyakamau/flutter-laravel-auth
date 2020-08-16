@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
 import '../../../core/errors/Exceptions.dart';
@@ -10,6 +11,7 @@ import '../datasources/Home/HomeLocalDataSource.dart';
 import '../datasources/Home/HomeRemoteDataSource.dart';
 import '../datasources/auth/AuthLocalDataSource.dart';
 
+@LazySingleton(as: HomeRepository)
 class HomeRepositoryImpl implements HomeRepository {
   final AuthLocalDataSource authLocalDataSource;
   final NetworkInfo networkInfo;

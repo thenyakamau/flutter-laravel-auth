@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../injection_container.dart';
+import '../../../injection.dart';
 import '../bloc/auth_bloc/auth_bloc.dart';
 import '../widgets/auth_widgets/auth_widgets.dart';
 import '../widgets/loading_widget.dart';
@@ -19,7 +19,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-    authBloc = sl<AuthBloc>();
+    authBloc = getIt<AuthBloc>();
   }
 
   @override

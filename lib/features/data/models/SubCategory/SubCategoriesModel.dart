@@ -9,7 +9,7 @@ part 'SubCategoriesModel.g.dart';
 class SubCategoriesModel extends SubCategories {
   final int id;
   final String name;
-  final String category_id;
+  final int category_id;
 
   SubCategoriesModel({
     @required this.id,

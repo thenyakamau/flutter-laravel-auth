@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
 import '../../../core/errors/Exceptions.dart';
@@ -14,6 +15,7 @@ import '../models/BusinessSettings/BusinessSettingsModel.dart';
 import '../models/Shop/ShopModel.dart';
 import '../models/User/UserModel.dart';
 
+@LazySingleton(as: AuthRepository)
 class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSource remoteDataSource;
   final AuthLocalDataSource localDataSource;

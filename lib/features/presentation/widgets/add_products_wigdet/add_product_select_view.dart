@@ -35,7 +35,7 @@ class AddProductSelectView extends StatelessWidget {
               itemCount: listSelection?.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  // onTap: tap(listSelection[index]),
+                  onTap: () => tap(listSelection[index]),
                   title: Text(listSelection[index].name),
                   trailing: Icon(Icons.chevron_right),
                 );

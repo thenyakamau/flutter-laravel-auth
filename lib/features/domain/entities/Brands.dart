@@ -1,16 +1,19 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-class SubCategories extends Equatable {
+class Brands extends Equatable {
   final int id;
   final String name;
-  final int category_id;
+  final String logo;
+  final int top;
 
-  SubCategories({
+  Brands({
     @required this.id,
     @required this.name,
-    @required this.category_id,
+    @required this.logo,
+    @required this.top,
   });
+
   @override
-  List<Object> get props => [id, name, category_id];
+  List<Object> get props => [id, name, logo, top];
 }

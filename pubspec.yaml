@@ -38,6 +38,7 @@ dependencies:
   shimmer: ^1.1.1
   moor_flutter: ^3.0.0
   font_awesome_flutter: ^8.8.1
+  injectable: ^1.0.4
 
 dev_dependencies:
   flutter_test:
@@ -48,6 +49,10 @@ dev_dependencies:
   chopper_generator: ^3.0.4
   flutter_launcher_icons: ^0.7.5
   moor_generator: ^3.1.0
+  injectable_generator: ^1.0.4
+
+dependency_overrides:
+  analyzer: "0.39.14"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

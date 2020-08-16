@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../core/errors/Failures.dart';
@@ -13,6 +14,7 @@ import '../../../domain/usecases/DashBoardDetails.dart';
 part 'home_event.dart';
 part 'home_state.dart';
 
+@injectable
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final DashBoardDetails dashBoardDetails;
   HomeBloc({@required this.dashBoardDetails}) : super(HomeInitial());

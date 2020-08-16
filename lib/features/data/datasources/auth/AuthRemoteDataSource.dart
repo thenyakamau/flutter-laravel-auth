@@ -1,4 +1,5 @@
 import 'package:chopper/chopper.dart';
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../core/errors/Exceptions.dart';
@@ -14,6 +15,7 @@ abstract class AuthRemoteDataSource {
   Future<Response> splashRefresh(AuthTokenModel authTokenModel);
 }
 
+@LazySingleton(as: AuthRemoteDataSource)
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final AppApiService apiService;
 

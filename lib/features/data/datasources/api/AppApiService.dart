@@ -2,12 +2,14 @@ import 'dart:io';
 
 import 'package:chopper/chopper.dart';
 import 'package:http/io_client.dart' as http;
+import 'package:injectable/injectable.dart';
 
 import '../../../../core/utils/Constants.dart';
 
 part 'AppApiService.chopper.dart';
 
 @ChopperApi(baseUrl: '/')
+@lazySingleton
 abstract class AppApiService extends ChopperService {
   @Post(path: 'seller/register')
   @FactoryConverter(request: FormUrlEncodedConverter.requestFactory)
@@ -50,6 +52,7 @@ abstract class AppApiService extends ChopperService {
   @Get(path: 'api/getProductBrand')
   Future<Response> getProductBrands(@Field('brand_id') String brandIds);
 
+  @factoryMethod
   static AppApiService create() {
     final client = ChopperClient(
         baseUrl: BASE_URL,

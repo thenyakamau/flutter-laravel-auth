@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'package:moor_flutter/moor_flutter.dart';
 
 import 'BusinessSettingsData/BusinessSettingsDao.dart';
@@ -10,8 +11,10 @@ import 'CustomColorsData/CustomColorsTable.dart';
 part 'EcommerceDatabase.g.dart';
 
 @UseMoor(
-    tables: [CategoriesTable, BusinessSettingsTable, CustomColorsTables],
-    daos: [CategoriesDao, BusinessSettingsDao, CustomColorsDao])
+  tables: [CategoriesTable, BusinessSettingsTable, CustomColorsTables],
+  daos: [CategoriesDao, BusinessSettingsDao, CustomColorsDao],
+)
+@injectable
 class EcommerceDatabase extends _$EcommerceDatabase {
   EcommerceDatabase()
       : super(

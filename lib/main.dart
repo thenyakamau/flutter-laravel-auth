@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_laravel_auth/injection.dart';
 import 'package:logging/logging.dart';
-import 'injection_container.dart' as di;
 
 import 'core/routes/RoutesGenerator.dart';
 import 'core/utils/Constants.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await di.init();
+  await configureInjection(Env.dev);
   _setUpLogging();
   runApp(MyApp());
 }

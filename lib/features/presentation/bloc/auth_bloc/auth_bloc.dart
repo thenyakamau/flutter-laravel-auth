@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../core/errors/Failures.dart';
@@ -19,6 +20,7 @@ import '../../../domain/usecases/SplashRefresh.dart';
 part 'auth_event.dart';
 part 'auth_state.dart';
 
+@injectable
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final CheckAuthentication checkAuthentication;
   final LoginUser loginUser;
@@ -48,9 +50,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         final String message = failure[1].toString();
         yield AuthErrorState(message: message, title: title);
       }, (success) async* {
-        final authEither = await loginUser(
-          LoginParams(email: event.email, password: event.password),
-        );
+        final authEither = await loginUser(LoginParams(
+          email: event.email.toLowerCase(),
+          password: event.password,
+        ));
         yield* _getAuthOrFail(authEither);
       });
     } else if (event is RegisterEvent) {

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
 import '../../../domain/entities/DashBoard.dart';
@@ -10,6 +11,7 @@ import '../../../domain/usecases/DashBoardDetails.dart';
 part 'dashboard_event.dart';
 part 'dashboard_state.dart';
 
+@injectable
 class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   final DashBoardDetails dashBoardDetails;
   DashboardBloc({@required this.dashBoardDetails}) : super(DashboardInitial());

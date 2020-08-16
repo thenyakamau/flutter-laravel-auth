@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../injection_container.dart';
+import '../../../injection.dart';
 import '../bloc/home_bloc/home_bloc.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,7 +16,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    homeBloc = sl<HomeBloc>();
+    homeBloc = getIt<HomeBloc>();
     homeBloc.add(GetDashBoardDetailsEvent());
   }
 

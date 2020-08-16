@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'package:moor_flutter/moor_flutter.dart';
 
 import '../EcommerceDatabase.dart';
@@ -6,6 +7,7 @@ import 'CustomColorsTable.dart';
 part 'CustomColorsDao.g.dart';
 
 @UseDao(tables: [CustomColorsTables])
+@lazySingleton
 class CustomColorsDao extends DatabaseAccessor<EcommerceDatabase>
     with _$CustomColorsDaoMixin {
   CustomColorsDao(EcommerceDatabase db) : super(db);
