@@ -93,7 +93,7 @@ class _$AppApiService extends AppApiService {
   @override
   Future<Response<dynamic>> getProductBrands(String brandIds) {
     final $url = '/api/getProductBrand';
-    final $body = <String, dynamic>{'brand_id': brandIds};
+    final $body = <String, dynamic>{'brand_ids': brandIds};
     final $request = Request('GET', $url, client.baseUrl, body: $body);
     return client.send<dynamic, dynamic>($request);
   }

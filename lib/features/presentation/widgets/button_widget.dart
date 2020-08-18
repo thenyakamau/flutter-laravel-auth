@@ -15,14 +15,13 @@ class MyCustomButton extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
-      color: Colors.white,
       child: RaisedButton(
         onPressed: press,
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
         ),
-        color: Theme.of(context).accentColor,
+        color: Colors.blue,
         child: Text(
           title,
           style: TextStyle(

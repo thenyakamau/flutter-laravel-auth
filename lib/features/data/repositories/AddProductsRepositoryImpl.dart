@@ -4,6 +4,7 @@ import 'package:meta/meta.dart';
 
 import '../../../core/errors/Failures.dart';
 import '../../../core/network/NetworkInfo.dart';
+import '../../domain/entities/Brands.dart';
 import '../../domain/entities/Categories.dart';
 import '../../domain/entities/CustomColors.dart';
 import '../../domain/entities/SubCategories.dart';
@@ -76,6 +77,17 @@ class AddProductsRepositoryImpl implements AddProductsRepository {
       final subSubCategories =
           await productRemoteDataSource.getSubSubCategories(id);
       return Right(subSubCategories);
+    } else {
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Brands>>> getProductBrands(
+      String brand_ids) async {
+    if (await networkInfo.isConnected) {
+      final brands = await productRemoteDataSource.getProductBrands(brand_ids);
+      return Right(brands);
     } else {
       return Left(ServerFailure());
     }

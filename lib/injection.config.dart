@@ -29,7 +29,9 @@ import 'features/presentation/bloc/dashboard_bloc/dashboard_bloc.dart';
 import 'database/EcommerceDatabase.dart';
 import 'features/domain/usecases/GetCategories.dart';
 import 'features/domain/usecases/GetDisplayColors.dart';
+import 'features/domain/usecases/GetProductBrands.dart';
 import 'features/domain/usecases/GetSubCategories.dart';
+import 'features/domain/usecases/GetSubSubCategories.dart';
 import 'features/presentation/bloc/home_bloc/home_bloc.dart';
 import 'features/data/datasources/Home/HomeLocalDataSource.dart';
 import 'features/data/datasources/Home/HomeRemoteDataSource.dart';
@@ -122,14 +124,20 @@ Future<GetIt> $initGetIt(
       () => GetCategories(productsRepository: get<AddProductsRepository>()));
   gh.lazySingleton<GetDisplayColors>(
       () => GetDisplayColors(productsRepository: get<AddProductsRepository>()));
+  gh.lazySingleton<GetProductBrands>(
+      () => GetProductBrands(productsRepository: get<AddProductsRepository>()));
   gh.lazySingleton<GetSubCategories>(
       () => GetSubCategories(productsRepository: get<AddProductsRepository>()));
+  gh.lazySingleton<GetSubSubCategories>(() =>
+      GetSubSubCategories(productsRepository: get<AddProductsRepository>()));
   gh.factory<HomeBloc>(
       () => HomeBloc(dashBoardDetails: get<DashBoardDetails>()));
   gh.factory<AddproductBloc>(() => AddproductBloc(
         displayColors: get<GetDisplayColors>(),
         getCategories: get<GetCategories>(),
         getSubCategories: get<GetSubCategories>(),
+        getSubSubCategories: get<GetSubSubCategories>(),
+        getProductBrands: get<GetProductBrands>(),
       ));
   return get;
 }

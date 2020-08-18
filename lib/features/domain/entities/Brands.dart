@@ -5,7 +5,7 @@ class Brands extends Equatable {
   final int id;
   final String name;
   final String logo;
-  final int top;
+  final String top;
 
   Brands({
     @required this.id,

@@ -10,7 +10,7 @@ class BrandsModel extends Brands {
   final int id;
   final String name;
   final String logo;
-  final int top;
+  final String top;
 
   BrandsModel({
     @required this.id,

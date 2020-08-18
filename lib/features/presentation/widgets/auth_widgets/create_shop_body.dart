@@ -103,21 +103,12 @@ class _CreateShopBodyState extends State<CreateShopBody> {
                             borderRadius: BorderRadius.circular(20),
                           ),
                           labelText: "Shop Number",
-                          labelStyle: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'OpenSans',
-                            fontSize: 12,
-                          ),
+                          labelStyle: kRLabelStyle,
                           errorText: widget.state.title == "shop_number"
                               ? widget.state.message
                               : null,
                           hintText: "Enter shop number",
-                          hintStyle: TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'OpenSans',
-                            fontSize: 12,
-                          ),
+                          hintStyle: kRHintStyle,
                           prefixIcon: Icon(Icons.call),
                         ),
                         onChanged: (value) {
@@ -136,21 +127,12 @@ class _CreateShopBodyState extends State<CreateShopBody> {
                             borderRadius: BorderRadius.circular(20),
                           ),
                           labelText: "Mpesa Number",
-                          labelStyle: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'OpenSans',
-                            fontSize: 12,
-                          ),
+                          labelStyle: kRLabelStyle,
                           errorText: widget.state.title == "mpesa_number"
                               ? widget.state.message
                               : null,
                           hintText: "Enter mpesa number",
-                          hintStyle: TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'OpenSans',
-                            fontSize: 12,
-                          ),
+                          hintStyle: kRHintStyle,
                           prefixIcon: Icon(Icons.transform),
                         ),
                         onChanged: (value) {
@@ -275,21 +257,12 @@ class _CreateShopBodyState extends State<CreateShopBody> {
                             borderRadius: BorderRadius.circular(20),
                           ),
                           labelText: "Bank Account",
-                          labelStyle: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'OpenSans',
-                            fontSize: 12,
-                          ),
+                          labelStyle: kRLabelStyle,
                           errorText: widget.state.title == "bank_account"
                               ? widget.state.message
                               : null,
                           hintText: "Enter bank account",
-                          hintStyle: TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'OpenSans',
-                            fontSize: 12,
-                          ),
+                          hintStyle: kRHintStyle,
                           prefixIcon: Icon(Icons.transform),
                         ),
                         onChanged: (value) {

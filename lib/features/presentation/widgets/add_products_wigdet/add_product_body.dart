@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/utils/Constants.dart';
 import '../../../domain/entities/CustomColors.dart';
 import '../../bloc/add_products_bloc/addproduct_bloc.dart';
+import '../button_widget.dart';
 import 'add_product_color_view.dart';
 import 'add_product_heading.dart';
 import 'add_product_tag_view.dart';
@@ -11,9 +12,11 @@ class AddProductBody extends StatefulWidget {
   const AddProductBody({
     Key key,
     @required this.productBloc,
+    @required this.productSelections,
   }) : super(key: key);
 
   final AddproductBloc productBloc;
+  final List productSelections;
 
   @override
   _AddProductBodyState createState() => _AddProductBodyState();
@@ -25,9 +28,14 @@ class _AddProductBodyState extends State<AddProductBody>
   List<CustomColors> colorsList = [];
   bool colorsOption = false;
   final tagEditingController = TextEditingController();
+  List selectionOptions;
   @override
   void initState() {
     super.initState();
+
+    if (widget.productSelections.isNotEmpty) {
+      selectionOptions = widget.productSelections;
+    }
   }
 
   @override
@@ -95,12 +103,12 @@ class _AddProductBodyState extends State<AddProductBody>
                               borderRadius: BorderRadius.circular(20),
                             ),
                             labelText: "Product Sub Category",
-                            labelStyle: kLabelStyle,
+                            labelStyle: kRLabelStyle,
                             // errorText: widget.state.title == "email"
                             //     ? widget.state.message
                             //     : null,
                             hintText: "Enter product sub category",
-                            hintStyle: kHintTextStyle,
+                            hintStyle: kRHintStyle,
                             prefixIcon: Icon(Icons.account_box),
                           ),
                           onChanged: (value) {},
@@ -116,12 +124,12 @@ class _AddProductBodyState extends State<AddProductBody>
                               borderRadius: BorderRadius.circular(20),
                             ),
                             labelText: "Product Sub Sub Category",
-                            labelStyle: kLabelStyle,
+                            labelStyle: kRLabelStyle,
                             // errorText: widget.state.title == "email"
                             //     ? widget.state.message
                             //     : null,
                             hintText: "Enter product sub sub category",
-                            hintStyle: kHintTextStyle,
+                            hintStyle: kRHintStyle,
                             prefixIcon: Icon(Icons.account_box),
                           ),
                           onChanged: (value) {},
@@ -147,7 +155,6 @@ class _AddProductBodyState extends State<AddProductBody>
                       prefixIcon: Icon(Icons.account_box),
                     ),
                     onChanged: (value) {},
-                    enabled: false,
                   ),
                 ),
                 Padding(
@@ -456,9 +463,13 @@ class _AddProductBodyState extends State<AddProductBody>
                     onChanged: (value) {},
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: MyCustomButton(press: null, title: 'Add Product'),
+                )
               ],
             ),
-          )
+          ),
         ],
       ),
     );

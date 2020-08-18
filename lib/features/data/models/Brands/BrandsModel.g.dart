@@ -11,7 +11,7 @@ BrandsModel _$BrandsModelFromJson(Map<String, dynamic> json) {
     id: json['id'] as int,
     name: json['name'] as String,
     logo: json['logo'] as String,
-    top: json['top'] as int,
+    top: json['top'] as String,
   );
 }
 

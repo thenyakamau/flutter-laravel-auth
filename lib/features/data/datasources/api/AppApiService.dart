@@ -50,7 +50,7 @@ abstract class AppApiService extends ChopperService {
   Future<Response> getProductSubSubCategories(@Field('id') int id);
 
   @Get(path: 'api/getProductBrand')
-  Future<Response> getProductBrands(@Field('brand_id') String brandIds);
+  Future<Response> getProductBrands(@Field('brand_ids') String brandIds);
 
   @factoryMethod
   static AppApiService create() {

@@ -11,6 +11,19 @@ final kLabelStyle = TextStyle(
   fontFamily: 'OpenSans',
 );
 
+final kRLabelStyle = TextStyle(
+  color: Colors.black,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'OpenSans',
+  fontSize: 12,
+);
+
+final kRHintStyle = TextStyle(
+  color: Colors.black,
+  fontFamily: 'OpenSans',
+  fontSize: 12,
+);
+
 final kBoxDecorationStyle = BoxDecoration(
   color: Color(0xFF6CA8F1),
   borderRadius: BorderRadius.circular(10.0),
@@ -55,4 +68,4 @@ const String INPUT_FAILURE_MESSAGE = "Input Failure";
 
 const String CACHE_AUTH_TOKEN = "CACHE_AUTH_TOKEN";
 const String CACHE_DASH_BOARD_DATA = "CACHE_DASH_BOARD_DATA";
-const String BASE_URL = "https://f777b200f842.ngrok.io";
+const String BASE_URL = "https://2dd62bc3db87.ngrok.io";

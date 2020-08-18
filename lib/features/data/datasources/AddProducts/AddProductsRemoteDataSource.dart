@@ -2,6 +2,8 @@ import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../core/errors/Exceptions.dart';
+import '../../../domain/entities/Brands.dart';
+import '../../models/Brands/BrandsModel.dart';
 import '../../models/Categories/CategoriesModel.dart';
 import '../../models/Colors/CustomColorsModel.dart';
 import '../../models/SubCategory/SubCategoriesModel.dart';
@@ -13,6 +15,7 @@ abstract class AddProductRemoteDataSource {
   Future<List<CategoriesModel>> getCategories();
   Future<List<SubCategoriesModel>> getSubCategories(int id);
   Future<List<SubSubCategoriesModel>> getSubSubCategories(int id);
+  Future<List<BrandsModel>> getProductBrands(String brand_ids);
 }
 
 @LazySingleton(as: AddProductRemoteDataSource)
@@ -89,6 +92,24 @@ class AddProductRemoteDataSourceImpl implements AddProductRemoteDataSource {
         print(e.toString());
       }
       return subSubCategories;
+    } else {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<List<BrandsModel>> getProductBrands(String brand_ids) async {
+    final response = await apiService.getProductBrands(brand_ids);
+    if (response.statusCode == 200) {
+      List<BrandsModel> brands = [];
+      try {
+        brands = (response.body['brands'] as List)
+            .map((e) => BrandsModel.fromJson(e))
+            .toList();
+      } catch (e) {
+        print(e.toString());
+      }
+      return brands;
     } else {
       throw ServerException();
     }

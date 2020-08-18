@@ -15,6 +15,7 @@ class AddProductPage extends StatefulWidget {
 
 class _AddProductPageState extends State<AddProductPage> {
   AddproductBloc productBloc;
+  List productSelections = [];
   @override
   void initState() {
     super.initState();
@@ -40,24 +41,71 @@ class _AddProductPageState extends State<AddProductPage> {
           child: BlocBuilder<AddproductBloc, AddproductState>(
             builder: (context, state) {
               if (state is AddproductInitial) {
-                return AddProductBody(productBloc: productBloc);
+                return AddProductBody(
+                  productBloc: productBloc,
+                  productSelections: productSelections,
+                );
               } else if (state is AddProductChooseCategoryState) {
                 return AddProductSelectView(
                   listSelection: state.categories,
-                  tap: (category) => productBloc.add(
-                    GetDisplaySubCategoriesEvent(category: category),
-                  ),
+                  tap: (category) {
+                    final selection = {
+                      'title': 'category',
+                      'name': category.name,
+                      'id': category.id
+                    };
+                    setState(() {
+                      productSelections.add(selection);
+                    });
+                    productBloc.add(
+                      GetDisplaySubCategoriesEvent(category: category),
+                    );
+                  },
                   title: 'Categories',
                 );
               } else if (state is AddProductChooseSubCategoryState) {
                 return AddProductSelectView(
                   listSelection: state.subCategories,
-                  tap: (subCategory) => productBloc.add(
-                    GetDisplaySubSubCategoriesEvent(
-                      subCategories: subCategory,
-                    ),
-                  ),
+                  tap: (subCategory) {
+                    final selection = {
+                      'title': 'sub_category',
+                      'name': subCategory.name,
+                      'id': subCategory.id
+                    };
+                    setState(() {
+                      productSelections.add(selection);
+                    });
+                    productBloc.add(
+                      GetDisplaySubSubCategoriesEvent(
+                          subCategories: subCategory),
+                    );
+                  },
                   title: 'Sub Categories',
+                );
+              } else if (state is AddProductChooseSubSubCategoryState) {
+                return AddProductSelectView(
+                  listSelection: state.subSubCategories,
+                  tap: (subsubCategory) {
+                    final selection = {
+                      'title': 'sub_sub_category',
+                      'name': subsubCategory.name,
+                      'id': subsubCategory.id
+                    };
+                    setState(() {
+                      productSelections.add(selection);
+                    });
+                    print(productSelections);
+                    productBloc.add(
+                      GetDisplayBrandsEvent(subSubCategories: subsubCategory),
+                    );
+                  },
+                  title: 'Sub Sub Categories',
+                );
+              } else if (state is AddProductChooseBrandState) {
+                return AddProductSelectView(
+                  listSelection: state.brands,
+                  tap: null,
+                  title: 'Brands',
                 );
               } else if (state is AddProductLoadingState) {
                 return LoadingWidget(height: height);
